@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AngularJS</title>
+    <title>SteamAPI test</title>
     <script src="./angular/angular.min.js"></script>
     <script src="./angular/angular-sanitize.min.js"></script>
 </head>
 
 <body>
-    <div ng-app="myApp" ng-controller="myAppCtrl">
+    <div ng-app="steamApi" ng-controller="steamApiCtrl">
         AppID:
-        <input ng-model="search">
+        <input ng-model="search" ng-model-options="{debounce: 500}">
         <h1>{{name}}</h1>
         <p ng-bind-html="about"></p>
     </div>
 
     <script>
-        var app = angular.module("myApp", ["ngSanitize"]);
-        app.controller("myAppCtrl", function ($scope, $http) {
-            $scope.$watch("search", function () {;
+        var app = angular.module("steamApi", ["ngSanitize"]);
+        app.controller("steamApiCtrl", function($scope, $http) {
+            $scope.$watch("search", function() {
                 fetch();
             });
 
