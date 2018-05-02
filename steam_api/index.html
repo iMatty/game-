@@ -6,42 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SteamAPI test</title>
-    <script src="./angular/angular.min.js"></script>
-    <script src="./angular/angular-sanitize.min.js"></script>
+    <script src="./js/angular.min.js"></script>
 </head>
 
 <body>
     <div ng-app="steamApi" ng-controller="steamApiCtrl">
-        AppID:
+        Name:
         <input ng-model="search" ng-model-options="{debounce: 500}">
-        <h1>{{name}}</h1>
-        <p ng-bind-html="about"></p>
+        <p ng-repeat="x in name">{{x}}</p>
     </div>
 
     <script>
-        var app = angular.module("steamApi", ["ngSanitize"]);
-        app.controller("steamApiCtrl", function($scope, $http) {
+        const KEY = "9D1A445A5B8F4437A230DD304D33F4D1";
+        var appList = [];
+        var filteredList = [];
+
+        var app = angular.module("steamApi", []);
+        app.controller("steamApiCtrl", function($scope, $http, $filter) {
+            $scope.search = "";
+            getList();
             $scope.$watch("search", function() {
                 fetch();
             });
+            
+
+            function getList() {
+                $http.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=" + KEY + "&format=csv")
+                .then(function(response) {
+                    appList = response.data.applist.apps;
+                })
+                .catch(function(error) {
+                })
+            };
 
             function fetch() {
-                $http.get("https://store.steampowered.com/api/appdetails?appids=" + $scope.search)
-                    .then(function(response) {
-                        if(response.data[$scope.search].success) {
-                            $scope.name = response.data[$scope.search].data.name;
-                            $scope.about = response.data[$scope.search].data.about_the_game;
-                        } else {
-                            $scope.name = "";
-                            $scope.about = "";
-                        }
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                        $scope.name = "";
-                        $scope.about = "";
-                    })
-            }
+                if($scope.search.length >= 3) {
+                    filteredList = $filter("filter")(appList, {name: $scope.search});
+                    $scope.name = filteredList.map(id => id.appid);
+                } else {
+                    $scope.name = [];
+                }
+            };
         });
     </script>
 </body>
