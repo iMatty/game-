@@ -31,7 +31,7 @@
             
 
             function getList() {
-                $http.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=" + KEY + "&format=csv")
+                $http.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=" + KEY + "&format=json")
                 .then(function(response) {
                     appList = response.data.applist.apps;
                 })
