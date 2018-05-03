@@ -7,30 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SteamAPI test</title>
     <script src="./js/angular.min.js"></script>
+    <script src="./js/angular-filter.min.js"></script>
 </head>
 
 <body>
     <div ng-app="steamApi" ng-controller="steamApiCtrl">
         Name:
-        <input ng-model="search" ng-model-options="{debounce: 500}">
-        <p ng-repeat="x in name">{{x}}</p>
+        <input ng-model="search" ng-model-options="{debounce: 800}">
+        <div ng-repeat="x in game | unique: 'appid'">
+            <p>{{x}}</p>
+        </div>
     </div>
 
     <script>
         const KEY = "9D1A445A5B8F4437A230DD304D33F4D1";
         var appList = [];
-        var filteredList = [];
+        var filterList = [];
+        var gameList = [];
 
-        var app = angular.module("steamApi", []);
+        var app = angular.module("steamApi", ["angular.filter"]);
         app.controller("steamApiCtrl", function($scope, $http, $filter) {
             $scope.search = "";
-            getList();
+            getAppList();
             $scope.$watch("search", function() {
-                fetch();
+                filterAppList(); 
             });
             
 
-            function getList() {
+            function getAppList() {
                 $http.get("http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=" + KEY + "&format=json")
                 .then(function(response) {
                     appList = response.data.applist.apps;
@@ -39,15 +43,47 @@
                 })
             };
 
-            function fetch() {
+            function filterAppList() {
                 if($scope.search.length >= 3) {
-                    filteredList = $filter("filter")(appList, {name: $scope.search});
-                    $scope.name = filteredList.map(id => id.appid);
+                    filterList = $filter("filter")(appList, {name: $scope.search});
+                    filterList = filterList.map(id => id.appid);
                 } else {
-                    $scope.name = [];
+                    filterList = [];
                 }
+                gameList = [];
+                getGameList();
+            };
+
+            function getGameList() {
+                for(let i = 0; i < filterList.length; i++) {
+                    $http.get("https://store.steampowered.com/api/appdetails?appids=" + filterList[i])
+                    .then(function(response) {
+                        if(response.data[filterList[i]].success) {
+                            if(!response.data[filterList[i]].data.is_free) {
+                                gameList.push({
+                                    name: response.data[filterList[i]].data.name,
+                                    appid: response.data[filterList[i]].data.steam_appid,
+                                    type: response.data[filterList[i]].data.type,
+                                    price: response.data[filterList[i]].data.price_overview.final
+                                })
+                            } else {
+                                gameList.push({
+                                    name: response.data[filterList[i]].data.name,
+                                    appid: response.data[filterList[i]].data.steam_appid,
+                                    type: response.data[filterList[i]].data.type,
+                                    price: 0
+                                })
+                            }
+                        }  
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    })
+                }
+                $scope.game = gameList;
             };
         });
+        
     </script>
 </body>
 
