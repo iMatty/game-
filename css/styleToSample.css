@@ -1,0 +1,31 @@
+
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set font color, size and family */
+    .row.content {
+	
+		color: white;
+		font-size: 80px;
+		font-family: italic;
+	
+	}
+
+	.navbar-brand span:nth-child(2) {
+		background: #FF9900;
+		color: #000000;
+		border-radius: 1vw;
+		padding: 0 1vw 1vw 1vw;
+		display: inline-block;
+		
+	}
+	.input-group{
+		margin:0 auto;
+	}
+	
+	body{
+		background-color: #404040;
+	}
