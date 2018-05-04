@@ -59,7 +59,7 @@
                     $http.get("https://store.steampowered.com/api/appdetails?appids=" + filterList[i])
                     .then(function(response) {
                         if(response.data[filterList[i]].success) {
-                            if(!response.data[filterList[i]].data.is_free) {
+                            if(response.data[filterList[i]].data.price_overview != undefined) {
                                 gameList.push({
                                     name: response.data[filterList[i]].data.name,
                                     appid: response.data[filterList[i]].data.steam_appid,
