@@ -13,11 +13,13 @@ $(document).ready(function(){
 					$("#lightsButton").html("Dark");
 					$("body").css("background-color", "white");
 					$("#logo_2").css("color", "black");
+					$("#contact_info").css("color", "black");
 				}
 				else if (now == "Dark") {
 					$("#lightsButton").html("Light");
 					$("body").css("background-color", "#404040");
 					$("#logo_2").css("color", "white");
+					$("#contact_info").css("color", "white");
 				}
 		});
 });
