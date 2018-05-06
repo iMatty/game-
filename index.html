@@ -5,6 +5,9 @@
   <title>game$</title>
   <meta name="description" content="game$ main page">
   <meta name="author" content="-">
+  
+  <meta name="google-signin-client_id" content="1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com">
+
 </head>
 
 </html>
@@ -38,7 +41,23 @@
    
       <ul class="nav navbar-nav navbar-right">
 		<li><a href="#" id="contact">Contact</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+        <li id="signInOut"><a href="#"><span class="glyphicon glyphicon-log-in" data-onsuccess="onSignIn"></span> Sign in</a></li>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script>
+			var button = document.getElementById("signInOut");
+			var signedOutContent = button.innerHTML;
+		
+			function onSignIn(googleUser) {
+				button.innerHTML = '<a href="#" onclick="signOut();">' + 
+									googleUser.getBasicProfile().getName() + '</a>';
+			}
+			function signOut() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function () {
+					button.innerHTML = signedOutContent;
+				});
+			}
+		</script>
       </ul>
     </div>
   </div>
