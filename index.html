@@ -45,18 +45,18 @@
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
 			var signInButton = document.getElementById("signInOut");
-			var signedOutContent = button.innerHTML;
+			var signedOutContent =  signInButton.innerHTML;
 		
 			function onSignIn(googleUser) {
 				console.log("signing in");
-				button.innerHTML = '<a href="#" onclick="signOut();">' + 
+				 signInButton.innerHTML = '<a href="#" onclick="signOut();">' + 
 									googleUser.getBasicProfile().getName() + '</a>';
 			}
 			function signOut() {
 				console.log("signing out");
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.signOut().then(function () {
-					button.innerHTML = signedOutContent;
+					 signInButton.innerHTML = signedOutContent;
 				});
 			}
 		</script>
