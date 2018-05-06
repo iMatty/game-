@@ -46,20 +46,31 @@
 		<script>
 			var signInButton = document.getElementById("signInOut");
 		
-			function onSignIn(googleUser) {
+			function onSuccess(googleUser) {
 				console.log("signing in");
 				signInButton.innerHTML = '<a href="#" onclick="signOut();">' + 
 									googleUser.getBasicProfile().getName() + '&#9660;</a>';
 			}
-			function signOut() {
+			function onFailure() {
 				console.log("signing out");
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.signOut().then(function () {
-					 signInButton.innerHTML = signedOutContent;
+					 renderButton();
 				});
-				signInButton.innerHTML = '<div id="googleSignIn" class="g-signin2" data-onsuccess="onSignIn"></div>';
-				gapi.signin2.render("googleSignIn");
 			}
+			function renderButton() {
+				signInButton.innerHTML = '<div id="my-signin2"></div>';
+				gapi.signin2.render('my-signin2', {
+					'scope': 'profile email',
+					'width': 240,
+					'height': 50,
+					'longtitle': true,
+					'theme': 'dark',
+					'onsuccess': onSuccess,
+					'onfailure': onFailure
+				});
+			}
+			<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 		</script>
       </ul>
     </div>
