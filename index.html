@@ -47,7 +47,7 @@
 		
 			function onSuccess(googleUser) {
 				console.log("signing in");
-				signInButton.innerHTML = '<a href="#" onclick="signOut();">' + 
+				signInButton.innerHTML = '<a href="#" onclick="onFailure();">' + 
 									googleUser.getBasicProfile().getName() + '&#9660;</a>';
 			}
 			function onFailure() {
