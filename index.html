@@ -57,8 +57,8 @@
 				auth2.signOut().then(function () {
 					 signInButton.innerHTML = signedOutContent;
 				});
-				
-				signInButton.innerHTML = '<div class="g-signin2" data-onsuccess="onSignIn"></div>';
+				signInButton.innerHTML = '<div id="googleSignIn" class="g-signin2" data-onsuccess="onSignIn"></div>';
+				gapi.signin2.render("googleSignIn");
 			}
 		</script>
       </ul>
