@@ -1,16 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>game$</title>
-  <meta name="description" content="game$ main page">
-  <meta name="author" content="-">
-  
-  <meta name="google-signin-client_id" content="1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com">
-
-</head>
-
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,80 +15,8 @@
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <a class="navbar-brand" href="#">Fabulous logo</a>
-
-<<<<<<< HEAD
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                       
-      </button>
-	  <a href="index.html"><img src="img/logo.png" height="70" width="220"/></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-   
-      <ul class="nav navbar-nav navbar-right">
-		<li><a href="#" id="contact">Contact</a></li>
-        <li id="signInOut"></li>
-		<script>
-			var signInButton = document.getElementById("signInOut");
-		
-			function onSuccess(googleUser) {
-				console.log("signing in");
-				signInButton.innerHTML = '<a href="#" onclick="onFailure();">' + 
-									googleUser.getBasicProfile().getName() + '&#9660;</a>';
-			}
-			function onFailure() {
-				console.log("signing out");
-				var auth2 = gapi.auth2.getAuthInstance();
-				auth2.signOut().then(function () {
-					 renderButton();
-				});
-			}
-			function renderButton() {
-				signInButton.innerHTML = '<a id="my-signin2"></a>';
-				gapi.signin2.render('my-signin2', {
-					'scope': 'profile email',
-					'width': 120,
-					'height': 25,
-					'longtitle': false,
-					'theme': 'light',
-					'onsuccess': onSuccess,
-					'onfailure': onFailure
-				});
-			}
-		</script>
-		<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div id="page" class="container-fluid text-center">    
-  <div class="row content">
-		<p id="logo_2">Game$</p>
-		</hr>
-		
-<form>
-  <div class="input-group col-sm-3" >
-    <input type="text" class="form-control" placeholder="Search">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit">
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
   </div>
 </div>
-=======
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
->>>>>>> ExampleBootstrap
-
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
