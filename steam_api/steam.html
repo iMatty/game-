@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SteamAPI test</title>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/angular-filter.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="steamApi" ng-controller="steamApiCtrl">
+            <p>{{tester}}</p>
+        Name:
+        <input ng-model="search" ng-model-options="{debounce: 800}">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+            </tr>
+            <tr ng-repeat="x in game | unique: 'app'">
+                <td>{{x.name}}</td>
+                <td>{{x.type}}</td>
+                <td>{{x.price}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="./js/steam-api.js"></script>
+</body>
+
+</html>
