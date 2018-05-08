@@ -20,11 +20,13 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Price</th>
+                <th>Sale</th>
             </tr>
             <tr ng-repeat="x in game | unique: 'app'">
                 <td>{{x.name}}</td>
                 <td>{{x.type}}</td>
                 <td>{{x.price}}</td>
+                <td>{{x.sale}}</td>
             </tr>
         </table>
     </div>
