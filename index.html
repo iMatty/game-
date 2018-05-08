@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello!</title>
+    <title>Game$</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./js/popper.min.js"></script>
@@ -14,7 +14,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Fabulous logo</a>
+		<a href="index.html" class="navbar-brand">
+			<img src="./img/logo.png" class="rounded" width="175" height="55">
+		</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -23,25 +25,19 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Fancy link</a>
+                    <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Awesome link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Charming link</a>
+                    <a class="nav-link" href="#">Login</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid" style="max-width: 50%">
         <div class="row" style="margin-top: 100px">
-            <div class="col-3">
-                <h1>LEFT</h1>
-            </div>
-            <div class="col-6">
+            <div class="col-12 input-position text-center">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Say something nice...">
+                    <input type="text" class="form-control" placeholder="Search...">
                     <span class="input-group-append">
                         <button class="btn btn-outline-primary" type="button">
                             <i class="fas fa-search"></i>
@@ -49,10 +45,8 @@
                     </span>
                 </div>
             </div>
-            <div class="col-3">
-                <h1>RIGHT</h1>
-            </div>
-        </div>
+		</div>
+
     </div>
 </body>
 </html>
