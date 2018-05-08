@@ -12,7 +12,7 @@ angular.module("steamApi", ["angular.filter"])
         });
 
         function getAppList() {
-            $http.get("../data/steam-min.json")
+            $http.get("https://firebasestorage.googleapis.com/v0/b/exampleproject-77f6d.appspot.com/o/steam-min.json?alt=media&token=8ec1809d-7693-459a-b895-3b57bc278fcd")
                 .then(function (response) {
                     let resp = response.data.applist.apps;
                     for (let i = 0; i < resp.length; i++) {
