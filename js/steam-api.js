@@ -12,7 +12,7 @@ angular.module("steamApi", ["angular.filter"])
         });
 
         function getAppList() {
-            $http.get("https://firebasestorage.googleapis.com/v0/b/exampleproject-77f6d.appspot.com/o/steam-min.json?alt=media&token=8ec1809d-7693-459a-b895-3b57bc278fcd")
+            $http.get("http://rainbow.nazwa.pl:8000/steam-min.json")
                 .then(function (response) {
                     let resp = response.data.applist.apps;
                     for (let i = 0; i < resp.length; i++) {
@@ -42,7 +42,7 @@ angular.module("steamApi", ["angular.filter"])
         };
 
         function getGameList() {
-            $http.get("https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview")
+            $http.get("http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview")
                 .then(function (response) {
                     for (let i = 0; i < mapList.length; i++) {
                         if (response.data[mapList[i]].success) {
