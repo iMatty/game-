@@ -12,7 +12,7 @@ angular.module("steamApi", ["angular.filter"])
         });
 
         function getAppList() {
-            $http.get("../data/steam-min.json")
+            $http.get("http://rainbow.nazwa.pl:8000/steam-min.json")
                 .then(function (response) {
                     let resp = response.data.applist.apps;
                     for (let i = 0; i < resp.length; i++) {
@@ -42,7 +42,7 @@ angular.module("steamApi", ["angular.filter"])
         };
 
         function getGameList() {
-            $http.get("https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview")
+            $http.get("http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview")
                 .then(function (response) {
                     for (let i = 0; i < mapList.length; i++) {
                         if (response.data[mapList[i]].success) {
