@@ -12,6 +12,20 @@
     <script src="./js/angular.min.js"></script>
     <script src="./js/angular-filter.min.js"></script>
     <script src="./js/fontawesome-all.min.js"></script>
+    <script src="./js/steam-api.js"></script>
+	
+	<meta id="signInMeta" name="google-signin-client_id">
+	<script>
+		var meta = document.getElementById("signInMeta");
+		switch(window.location.hostname) {
+			case "imatty.github.io":
+				meta.content = "1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com";
+			case "http://rainbow.nazwa.pl":
+				meta.content = "1008872979554-fl0anjm15o3jbikaa2mrocicl2cou16a.apps.googleusercontent.com";
+			case "www.resourceries.com":
+				meta.content = "1008872979554-gpimvc30c3jlqks6mh21u3hjnvn601t7.apps.googleusercontent.com";
+		}
+	</script>
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -25,15 +39,9 @@
 
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Fancy link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Awesome link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Charming link</a>
-                </li>
+				<li id="account" class="nav-item"></li>
+				<script src="js/googleLogin.js"></script>
+				<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
             </ul>
         </div>
     </nav>
@@ -79,6 +87,5 @@
             <div class="col-2"></div>
         </div>
     </div>
-    <script src="./js/steam-api.js"></script>
 </body>
 </html>
