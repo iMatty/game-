@@ -37,7 +37,8 @@ angular.module("galaxyApi", ["angular.filter"])
                                 app: appList[i].id,
                                 type: response.data[i].game_type,
                                 price: appList[i].price.amount,
-                                sale: appList[i].price.isDiscounted
+                                sale: appList[i].price.isDiscounted,
+                                link: "https://www.gog.com" + appList[i].url
                             });
                         }
                     })
