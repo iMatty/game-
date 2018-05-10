@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SteamAPI test</title>
+    <title>GalaxyAPI test</title>
     <script src="./js/angular.min.js"></script>
     <script src="./js/angular-filter.min.js"></script>
 </head>
 
 <body>
-    <div ng-app="steamApi" ng-controller="steamApiCtrl">
-            <p>{{tester}}</p>
+    <div ng-app="galaxyApi" ng-controller="galaxyApiCtrl">
+            
         Name:
         <input ng-model="search" ng-model-options="{debounce: 800}">
+
         <table>
             <tr>
                 <th>Name</th>
@@ -31,7 +32,7 @@
         </table>
     </div>
 
-    <script src="./js/steam-api.js"></script>
+    <script src="./js/galaxy-api.js"></script>
 </body>
 
 </html>
