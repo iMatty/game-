@@ -4,15 +4,17 @@ angular.module("steamApi", ["angular.filter"])
         var filterList = [];
         var mapList = [];
         var gameList = [];
+        var init = false;
 
         $scope.search = "";
+
         getAppList();
         $scope.$watch("search", function () {
-            filterAppList();
+            init ? filterAppList() : init = true;
         });
 
         function getAppList() {
-            $http.get("http://rainbow.nazwa.pl:8000/steam-min.json")
+            $http.get("../data/steam-min.json")
                 .then(function (response) {
                     let resp = response.data.applist.apps;
                     for (let i = 0; i < resp.length; i++) {
@@ -25,18 +27,18 @@ angular.module("steamApi", ["angular.filter"])
                     }
                 })
                 .catch(function (error) { })
+            init = true;
         };
 
         function filterAppList() {
+            filterList = [];
+            gameList = [];
             if ($scope.search.length >= 3) {
                 filterList = $filter("filter")(appList, { search: $scope.search });
                 mapList = filterList.map(id => id.app);
-                gameList = [];
                 getGameList();
             } else {
-                filterList = [];
                 mapList = [];
-                gameList = [];
                 $scope.game = gameList;
             }
         };
