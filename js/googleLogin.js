@@ -2,7 +2,7 @@ var userProfile = document.getElementById("account");
 		
 function onSuccess(googleUser) {
 	userProfile.innerHTML = '<a id="userProfile" class="nav-link" onclick="onFailure();">' + 
-						googleUser.getBasicProfile().getName() + '&#9660;</a>';
+						googleUser.getBasicProfile().getName() + ' &#9660;</a>';
 }
 function onFailure() {
 	var auth2 = gapi.auth2.getAuthInstance();
