@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GalaxyAPI test</title>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/angular-filter.min.js"></script>
+</head>
+
+<body>
+<<<<<<< HEAD:steam.html
+    <div ng-app="steamApi" ng-controller="steamApiCtrl">
+        
+=======
+    <div ng-app="galaxyApi" ng-controller="galaxyApiCtrl">
+            
+>>>>>>> origin/GalaxyAPI:galaxy.html
+        Name:
+        <input ng-model="search" ng-model-options="{debounce: 800}">
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Sale</th>
+                <th>Link</th>
+            </tr>
+            <tr ng-repeat="x in game | unique: 'app'">
+                <td>{{x.name}}</td>
+                <td>{{x.type}}</td>
+                <td>{{x.price}}</td>
+                <td>{{x.sale}}</td>
+                <td>{{x.link}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="./js/galaxy-api.js"></script>
+</body>
+
+</html>
