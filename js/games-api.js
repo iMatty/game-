@@ -11,11 +11,25 @@ angular.module("gamesApi", ["angular.filter"])
             }
         };
     })
-    .controller("steamApiCtrl", function ($scope, $http, $filter, searchService) {
+    .factory("gameListService", function () {
+        var list = { gameList: [] };
+
+        return {
+            getList: function () {
+                return list.gameList;
+            },
+            setList: function (games) {
+                list.gameList.push(games);
+            },
+            clearList: function () {
+                list.gameList = [];
+            }
+        };
+    })
+    .controller("steamApiCtrl", function ($scope, $http, $filter, searchService, gameListService) {
         var appList = [];
         var filterList = [];
         var mapList = [];
-        var gameList = [];
         var init = false;
 
         $scope.search = "";
@@ -45,14 +59,13 @@ angular.module("gamesApi", ["angular.filter"])
 
         function filterAppList() {
             filterList = [];
-            gameList = [];
+            gameListService.clearList();
             if ($scope.search.length >= 3) {
                 filterList = $filter("filter")(appList, { search: $scope.search });
                 mapList = filterList.map(id => id.app);
                 getGameList();
             } else {
                 mapList = [];
-                $scope.game = gameList;
             }
         };
 
@@ -62,7 +75,7 @@ angular.module("gamesApi", ["angular.filter"])
                     .then(function (response) {
                         for (let i = 0; i < mapList.length; i++) {
                             if (response.data[mapList[i]].success) {
-                                gameList.push({
+                                gameListService.setList({
                                     name: filterList[i].name,
                                     app: filterList[i].app,
                                     type: filterList[i].type,
@@ -75,12 +88,10 @@ angular.module("gamesApi", ["angular.filter"])
                     })
                     .catch(function (error) { })
             }
-            $scope.game = gameList;
         };
     })
-    .controller("galaxyApiCtrl", function ($scope, $http, $filter, searchService) {
+    .controller("galaxyApiCtrl", function ($scope, $http, $filter, searchService, gameListService) {
         var appList = [];
-        var gameList = [];
         var init = false;
 
         $scope.search = "";
@@ -96,7 +107,6 @@ angular.module("gamesApi", ["angular.filter"])
 
         function getAppList() {
             appList = [];
-            gameList = [];
             if ($scope.search.length >= 3) {
                 $http.get("http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search)
                     .then(function (response) {
@@ -107,7 +117,7 @@ angular.module("gamesApi", ["angular.filter"])
                     })
                     .catch(function (error) { })
             } else {
-                $scope.game = gameList;
+                $scope.game = gameListService.getList();
             }
         };
 
@@ -116,7 +126,7 @@ angular.module("gamesApi", ["angular.filter"])
                 $http.get("http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + appList.map(id => id.id).join(","))
                     .then(function (response) {
                         for (let i = 0; i < appList.length; i++) {
-                            gameList.push({
+                            gameListService.setList({
                                 name: appList[i].title,
                                 app: appList[i].id,
                                 type: response.data[i].game_type,
@@ -128,6 +138,6 @@ angular.module("gamesApi", ["angular.filter"])
                     })
                     .catch(function (error) { })
             }
-            $scope.game = gameList;
+            $scope.game = gameListService.getList();
         };
     });

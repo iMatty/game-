@@ -12,26 +12,9 @@
 
 <body ng-app="gamesApi">
     <div ng-controller="steamApiCtrl">
-        
+
         Name:
         <input ng-model="search" ng-model-options="{debounce: 800}">
-
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Sale</th>
-                <th>Link</th>
-            </tr>
-            <tr ng-repeat="x in game | unique: 'app'">
-                <td>{{x.name}}</td>
-                <td>{{x.type}}</td>
-                <td>{{x.price}}</td>
-                <td>{{x.sale}}</td>
-                <td>{{x.link}}</td>
-            </tr>
-        </table>
 
     </div>
     <div ng-controller="galaxyApiCtrl">
