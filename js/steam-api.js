@@ -4,15 +4,17 @@ angular.module("steamApi", ["angular.filter"])
         var filterList = [];
         var mapList = [];
         var gameList = [];
+        var init = false;
 
         $scope.search = "";
+
         getAppList();
         $scope.$watch("search", function () {
-            filterAppList();
+            init ? filterAppList() : init = true;
         });
 
         function getAppList() {
-            $http.get("http://rainbow.nazwa.pl:8000/steam-min.json")
+            $http.get("../data/steam-min.json")
                 .then(function (response) {
                     let resp = response.data.applist.apps;
                     for (let i = 0; i < resp.length; i++) {
@@ -25,18 +27,18 @@ angular.module("steamApi", ["angular.filter"])
                     }
                 })
                 .catch(function (error) { })
+            init = true;
         };
 
         function filterAppList() {
+            filterList = [];
+            gameList = [];
             if ($scope.search.length >= 3) {
                 filterList = $filter("filter")(appList, { search: $scope.search });
                 mapList = filterList.map(id => id.app);
-                gameList = [];
                 getGameList();
             } else {
-                filterList = [];
                 mapList = [];
-                gameList = [];
                 $scope.game = gameList;
             }
         };
@@ -47,23 +49,14 @@ angular.module("steamApi", ["angular.filter"])
                     .then(function (response) {
                         for (let i = 0; i < mapList.length; i++) {
                             if (response.data[mapList[i]].success) {
-                                if (response.data[mapList[i]].data.price_overview != undefined) {
-                                    gameList.push({
-                                        name: filterList[i].name,
-                                        app: filterList[i].app,
-                                        type: filterList[i].type,
-                                        price: (response.data[mapList[i]].data.price_overview.final / 100).toFixed(2),
-                                        sale: (response.data[mapList[i]].data.price_overview.discount_percent != 0 ? true : false)
-                                    });
-                                } else {
-                                    gameList.push({
-                                        name: filterList[i].name,
-                                        app: filterList[i].app,
-                                        type: filterList[i].type,
-                                        price: "-",
-                                        sale: false
-                                    });
-                                }
+                                gameList.push({
+                                    name: filterList[i].name,
+                                    app: filterList[i].app,
+                                    type: filterList[i].type,
+                                    price: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
+                                    sale: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.discount_percent != 0 ? true : false) : false,
+                                    link: "https://store.steampowered.com/app/" + filterList[i].app
+                                });
                             }
                         }
                     })
