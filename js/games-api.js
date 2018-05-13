@@ -94,6 +94,8 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
         var appList = [];
         var init = false;
 
+        $scope.dtOptions = { searching: false };
+
         $scope.search = "";
 
         $scope.$watch(function () {
