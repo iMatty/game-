@@ -81,6 +81,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
                                     type: filterList[i].type,
                                     price: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
                                     sale: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.discount_percent != 0 ? true : false) : false,
+                                    platform: "Steam",
                                     link: "https://store.steampowered.com/app/" + filterList[i].app
                                 });
                             }
@@ -134,6 +135,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
                                 type: response.data[i].game_type,
                                 price: appList[i].price.amount,
                                 sale: appList[i].price.isDiscounted,
+                                platform: "GOG",
                                 link: "https://www.gog.com" + appList[i].url
                             });
                         }
