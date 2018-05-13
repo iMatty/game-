@@ -1,4 +1,4 @@
-angular.module("gamesApi", ["angular.filter"])
+angular.module("gamesApi", ["angular.filter", "datatables"])
     .factory("searchService", function () {
         var phrase = { searchPhrase: "" };
 

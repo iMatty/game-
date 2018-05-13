@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,16 @@
     <title>GamesAPI tables</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.dataTables.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/angular.min.js"></script>
     <script src="./js/angular-filter.min.js"></script>
+    <script src="./js/angular-datatables.min.js"></script>
+    <link rel="stylesheet" href="./css/angular-datatables.min.css">
+
 </head>
+
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <a class="navbar-brand" href="#">GamesAPI tables</a>
@@ -30,7 +36,7 @@
         <div class="row" style="margin-top: 50px" ng-controller="galaxyApiCtrl">
             <div class="col-2"></div>
             <div class="col-8">
-                <table class="table table-hover">
+                <table datatable="ng" class="table table-striped table-bordered" style="width: 100%">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -46,7 +52,9 @@
                             <td>{{i.type}}</td>
                             <td>{{i.price}}</td>
                             <td>{{i.sale}}</td>
-                            <td><a target="_blanc" ng-href="{{i.link}}">Link</a></td>
+                            <td>
+                                <a target="_blanc" ng-href="{{i.link}}">Link</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -56,4 +64,5 @@
     </div>
     <script src="./js/games-api.js"></script>
 </body>
+
 </html>
