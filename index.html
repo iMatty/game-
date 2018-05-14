@@ -1,127 +1,174 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>game$</title>
-  <meta name="description" content="game$ main page">
-  <meta name="author" content="-">
-  
-  <meta name="google-signin-client_id" content="1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com">
-
-</head>
-
-</html>
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-  <title>Game$</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="js/angular.min.js"></script>
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/script.js"></script>
-  <link rel="stylesheet" href="css/styleToSample.css" type="text/css"/>
+  <head>
 
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Game$ project">
+    <meta name="author" content="">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                       
-      </button>
-	  <a href="index.html"><img src="img/logo.png" height="70" width="220"/></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-   
-      <ul class="nav navbar-nav navbar-right">
-		<li><a href="#" id="contact">Contact</a></li>
-        <li id="signInOut"></li>
-		<script>
-			var signInButton = document.getElementById("signInOut");
-		
-			function onSuccess(googleUser) {
-				console.log("signing in");
-				signInButton.innerHTML = '<a href="#" onclick="onFailure();">' + 
-									googleUser.getBasicProfile().getName() + '&#9660;</a>';
-			}
-			function onFailure() {
-				console.log("signing out");
-				var auth2 = gapi.auth2.getAuthInstance();
-				auth2.signOut().then(function () {
-					 renderButton();
-				});
-			}
-			function renderButton() {
-				signInButton.innerHTML = '<a id="my-signin2"></a>';
-				gapi.signin2.render('my-signin2', {
-					'scope': 'profile email',
-					'width': 120,
-					'height': 25,
-					'longtitle': false,
-					'theme': 'light',
-					'onsuccess': onSuccess,
-					'onfailure': onFailure
-				});
-			}
-		</script>
-		<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div id="page" class="container-fluid text-center">    
-  <div class="row content">
-		<p id="logo_2">Game$</p>
-		</hr>
-		
-<form>
-  <div class="input-group col-sm-3" >
-    <input type="text" class="form-control" placeholder="Search">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit">
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
-  </div>
-</div>
+    <title>Game$</title>
 
-<section id="contact_info" class="content-section text-center">
-        <div class="contact-section">
-            <div class="container">
-              <h2>Contact Us</h2>
-              <p>Feel free to shout us by feeling the contact form</p>
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <form class="form-horizontal">
-                    <div class="form-group">
-                      <label for="exampleInputName2">Name</label>
-                      <input type="text" class="form-control" id="exampleInputName2" placeholder="Janusz Nowak">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail2">Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Janusz.Nowak@example.com">
-                    </div>
-                    <div class="form-group ">
-                      <label for="exampleInputText">Your Message</label>
-                     <textarea  class="form-control" placeholder="Description"></textarea> 
-                    </div>
-                    <button type="submit" class="btn btn-default">Send Message</button>
-                  </form>
-                </div>
-              </div>
-            </div>
+    <!-- Bootstrap core CSS -->
+	<link href="css/modified-bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="css/modified-bootstrap/bootstrap.css" rel="stylesheet">
+	
+    <!-- Custom fonts (add to css font awsome) -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles (add to css)-->
+    <link href="css/agency.min.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="http://rainbow.nazwa.pl:8888/">Game$</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+            </li>
+            
+          </ul>
         </div>
-      </section>
-	  
-<button id="lightsButton" style="position: absolute; left: 95%; right: 20%; bottom: 3%;">Light</button>
-</body>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To The Land Of Games!</div>
+          <div class="intro-heading text-uppercase"></div>
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#about">Tell Me More</a>
+        </div>
+      </div>
+    </header>
+
+
+    
+
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">About</h2>
+            <h3 class="section-subheading text-muted">"Game$" is a Single Page Application made for people to find games in cheapest price. At this time we can offer to search games at one time from 	two platforms Steam and GOG. As a developers we can assure that this project is going to be continued and become even greater. </h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="bg-light" id="team">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+            <h3 class="section-subheading text-muted">Four enthusiasts of Web Development</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/mich.jpg" alt="">
+              <h4>Michał Starski</h4>
+              <p class="text-muted">Lead Developer</p>
+             
+            </div>
+          </div>
+		   <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/grz.jpg" alt="">
+              <h4>Grzegorz Więcek</h4>
+              <p class="text-muted">Lead Developer</p>
+
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/kam.png" alt="">
+              <h4>Kamil Szewczyk</h4>
+              <p class="text-muted">Lead Developer</p>
+   
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/mat.jpg" alt="">
+              <h4>Mateusz Wielgus</h4>
+              <p class="text-muted">Lead Developer</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <p class="large text-muted">We are all IT students at Economic University of Cracow. We are specialized in Web Development. Our base is known of JavaScript and AngularJS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+    <!-- Visit us -->
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+			<h2><a class="section-heading text-uppercase" href="http://rainbow.nazwa.pl:8888/">Visit Us</a></h2>
+            <h3 class="section-subheading text-muted">You can visit us by clicking upper text or "Game$" in top left corner</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="copyright">Copyright &copy; Game$ 2018</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript (add to js) -->
+    <script src="js/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts (add to js) -->
+    <script src="js/agency.min.js"></script>
+
+  </body>
+
 </html>
