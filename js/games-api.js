@@ -1,4 +1,15 @@
 angular.module("gamesApi", ["angular.filter", "datatables"])
+    .run(function ($rootScope) {
+        $rootScope.steamReady = true;
+        $rootScope.galaxyReady = true;
+        $rootScope.dtOptions = { 
+            searching: false,
+            destroy: true,
+            language: {
+                emptyTable: "No results found."
+            }
+        };
+    })
     .factory("searchService", function () {
         var phrase = { searchPhrase: "" };
 
@@ -12,7 +23,11 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
         };
     })
     .factory("gameListService", function () {
-        var list = { gameList: [] };
+        var list = { 
+            gameList: [],
+            steamReady: false,
+            galaxyReady: false
+        };
 
         return {
             getList: function () {
@@ -26,7 +41,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
             }
         };
     })
-    .controller("steamApiCtrl", function ($scope, $http, $filter, searchService, gameListService) {
+    .controller("steamApiCtrl", function ($scope, $rootScope, $http, $filter, searchService, gameListService) {
         var appList = [];
         var filterList = [];
         var mapList = [];
@@ -36,8 +51,8 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
 
         getAppList();
         $scope.$watch("search", function (value) {
-            init ? filterAppList() : init = true;
             searchService.setPhrase(value);
+            init ? filterAppList() : init = true;
         });
 
         function getAppList() {
@@ -59,6 +74,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
 
         function filterAppList() {
             filterList = [];
+            $rootScope.steamReady = false;
             gameListService.clearList();
             if ($scope.search.length >= 3) {
                 filterList = $filter("filter")(appList, { search: $scope.search });
@@ -66,6 +82,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
                 getGameList();
             } else {
                 mapList = [];
+                $rootScope.steamReady = true;
             }
         };
 
@@ -86,16 +103,18 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
                                 });
                             }
                         }
+                        $rootScope.steamReady = true;
                     })
                     .catch(function (error) { })
+            } else {
+                $rootScope.steamReady = true;
             }
+            
         };
     })
-    .controller("galaxyApiCtrl", function ($scope, $http, $filter, searchService, gameListService) {
+    .controller("galaxyApiCtrl", function ($scope, $rootScope, $http, $filter, searchService, gameListService) {
         var appList = [];
         var init = false;
-
-        $scope.dtOptions = { searching: false };
 
         $scope.search = "";
 
@@ -110,6 +129,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
 
         function getAppList() {
             appList = [];
+            $rootScope.galaxyReady = false;
             if ($scope.search.length >= 3) {
                 $http.get("http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search)
                     .then(function (response) {
@@ -121,6 +141,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
                     .catch(function (error) { })
             } else {
                 $scope.game = gameListService.getList();
+                $rootScope.galaxyReady = true;
             }
         };
 
@@ -139,8 +160,11 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
                                 link: "https://www.gog.com" + appList[i].url
                             });
                         }
+                        $rootScope.galaxyReady = true;
                     })
                     .catch(function (error) { })
+            } else {
+                $rootScope.galaxyReady = true;
             }
             $scope.game = gameListService.getList();
         };

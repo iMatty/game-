@@ -37,7 +37,7 @@
         <div class="row" style="margin-top: 50px" ng-controller="galaxyApiCtrl">
             <div class="col-2"></div>
             <div class="col-8">
-                <table id="gamesTable" datatable="ng" dt-options="dtOptions" class="table table-striped" style="width: 100%">
+                <table datatable="ng" dt-options="dtOptions" class="table table-striped" style="width: 100%">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -45,10 +45,10 @@
                             <th>Price</th>
                             <th>Sale</th>
                             <th>Platform</th>
-                            <th>Link</th>    
+                            <th>Link</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody ng-hide="!steamReady || !galaxyReady">
                         <tr ng-repeat="i in game | unique: 'app'">
                             <td>{{i.name}}</td>
                             <td>{{i.type}}</td>
@@ -61,6 +61,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div ng-hide="steamReady && galaxyReady" class="progress" style="height: 24px">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%; height: 24px"></div>
+                </div>
             </div>
             <div class="col-2"></div>
         </div>
