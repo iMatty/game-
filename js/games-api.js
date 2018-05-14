@@ -6,7 +6,9 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
             searching: false,
             destroy: true,
             language: {
-                emptyTable: "No results found."
+                emptyTable: "No results found",
+                info: "Total results found: _MAX_",
+                infoEmpty: "",
             }
         };
     })
