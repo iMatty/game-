@@ -1,6 +1,10 @@
 body.dark-mode {
   background-color: #111;
   color: #eee;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 body.dark-mode a {
   color: #eee;
@@ -19,6 +23,10 @@ body.dark-mode table.a {
 body.light-mode {
   background-color: #eee;
   color: #111;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 body.light-mode a {
   color: #111;
@@ -27,3 +35,5 @@ body.light-mode button {
   background-color: #111;
   color: #eee;
 }
+
+
