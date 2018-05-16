@@ -15,17 +15,28 @@
     <script src="./js/angular-filter.min.js"></script>
     <script src="./js/angular-datatables.min.js"></script>
     <script src="./js/datatables.bootstrap4.min.js"></script>
+	<script src="./js/dark_light.js"></script>
     <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
-
+	<link rel="stylesheet" href="./css/dark_light.css">
 </head>
 
-<body>
+<body id="body" class="light-mode">
 
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <a class="navbar-brand" href="">
-			<img src="img/logo.svg" alt="logo" />
-		</a>
-    </nav>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="">
+					<img src="img/logo.svg" alt="logo" />	
+				</a>
+			</div>
+    
+			<ul class="nav navbar-nav navbar-right">
+				<li><button type="submit" class="btn btn-default">Login</button></li>
+				<div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+				<li><button type="button" class="btn btn-default" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">Light/Dark</button></li>
+			</ul>
+		</div>
+	</nav>
 	
     <div class="container-fluid" ng-app="gamesApi">
         <div class="row" style="margin-top: 50px" ng-controller="steamApiCtrl">
@@ -73,5 +84,4 @@
     </div>
     <script src="./js/games-api.js"></script>
 </body>
-
 </html>
