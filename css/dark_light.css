@@ -3,10 +3,14 @@ body.dark-mode {
   color: #eee;
 }
 body.dark-mode a {
-  color: #111;
+  color: #eee;
 }
 body.dark-mode button {
   background-color: #eee;
+  color: #111;
+}
+
+body.dark-mode table.a {
   color: #111;
 }
 
