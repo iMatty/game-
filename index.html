@@ -18,6 +18,7 @@
 	<script src="./js/dark_light.js"></script>
     <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
 	<link rel="stylesheet" href="./css/dark_light.css">	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<meta id="signInMeta" name="google-signin-client_id">
 	<script>
@@ -57,7 +58,7 @@
 				onclick="toggleDarkLight()" title="Toggle dark/light mode">dark mode</button>
     </nav>
 	
-    <div style="position:relative" class="container-fluid" ng-app="gamesApi">
+    <div style="margin-bottom: 4em" class="container-fluid" ng-app="gamesApi">
         <div class="row" style="margin-top: 50px" ng-controller="steamApiCtrl">
             <div class="col-3"></div>
             <div class="col-6">
@@ -68,37 +69,31 @@
             <div class="col-3"></div>
         </div>
         <div class="row" style="margin-top: 50px" ng-controller="galaxyApiCtrl">
-            <div class="col-2"></div>
-            <div class="col-8">
+			<div class="col-xs-0 col-sm-0 col-md-2">&nbsp;</div>
+            <div class="col-xs-12 col-sm-12 col-md-8 table-responsive">
                 <table datatable="ng" dt-options="dtOptions" class="table table-striped" style="width: 100%">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Type</th>
                             <th>Price</th>
-                            <th>Sale</th>
                             <th>Platform</th>
-                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody ng-hide="!steamReady || !galaxyReady">
                         <tr ng-repeat="i in game | unique: 'app'">
                             <td>{{i.name}}</td>
                             <td>{{i.type}}</td>
-                            <td>{{i.price}}</td>
-                            <td>{{i.sale}}</td>
-                            <td>{{i.platform}}</td>
-                            <td>
-                                <a target="_blanc" ng-href="{{i.link}}">Link</a>
-                            </td>
+                            <td>{{i.price}} <b ng-if="i.sale" style="color:red; font-size:0.65em">SALE</b></td>
+                            <td><a target="_blanc" ng-href="{{i.link}}">{{i.platform}} <span class="fa fa-external-link" style="font-size:0.65em;font-weight:bold"></span></a></td>
                         </tr>
                     </tbody>
                 </table>
                 <div ng-hide="steamReady && galaxyReady" class="progress" style="height: 24px">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%; height: 24px"></div>
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%; height: 2em"></div>
                 </div>
             </div>
-            <div class="col-2"></div>
+			<div class="col-xs-0 col-xm-0 col-md-2">&nbsp;</div>
         </div>
     </div>
 
