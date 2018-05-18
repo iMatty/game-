@@ -31,7 +31,7 @@ body.light-mode {
 body.light-mode a {
   color: #111;
 }
-body.light-mode button {
+body.light-mode button:not(.navbar-toggler) {
   background-color: #111;
   color: #eee;
 }
