@@ -16,8 +16,11 @@
     <script src="./js/angular-datatables.min.js"></script>
     <script src="./js/datatables.bootstrap4.min.js"></script>
 	<script src="./js/dark_light.js"></script>
+	<script src="./js/login.js"></script>
     <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
 	<link rel="stylesheet" href="./css/dark_light.css">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="6158674677-00kgvn6e7iibnbmn3encnpg6nfin7uvs.apps.googleusercontent.com.apps.googleusercontent.com">
 </head>
 
 <body id="body" class="light-mode">
@@ -96,16 +99,14 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-	
     <script src="./js/games-api.js"></script>
 </body>
 </html>
