@@ -53,26 +53,10 @@
 				<li id="account" class="nav-item dropdown"></li>
             </ul>
         </div>
+		<button id="darkLightToggle" style="position:absolute;left:0%;top:100%;" type="button" class="btn btn-default" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">light</button>
     </nav>
-	<!-- <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="">
-					<img src="img/logo.svg" alt="logo" />
-				</a>
-			</div>
-    
-			<ul class="nav navbar-nav navbar-right">
-				<li><button type="button" class="btn btn-default">Contact</button></li>
-				<div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
-				<li><button type="submit" class="btn btn-default" class="btn btn-primary" data-toggle="modal" data-target="#LoginModal">Login</button></li>
-				<div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
-				<li><button type="button" class="btn btn-default" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">Light/Dark</button></li>
-			</ul>
-		</div>
-	</nav> -->
 	
-    <div class="container-fluid" ng-app="gamesApi">
+    <div style="position:relative" class="container-fluid" ng-app="gamesApi">
         <div class="row" style="margin-top: 50px" ng-controller="steamApiCtrl">
             <div class="col-3"></div>
             <div class="col-6">

@@ -1,5 +1,6 @@
 function toggleDarkLight() {
   var body = document.getElementById("body");
-  var currentClass = body.className;
-  body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+  var toggleButton = document.getElementById("darkLightToggle");
+  body.className = body.className == "dark-mode" ? "light-mode" : "dark-mode";
+  toggleButton.innerHTML = body.className == "dark-mode" ? "dark" : "light";
 }
