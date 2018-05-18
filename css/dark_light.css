@@ -9,7 +9,7 @@ body.dark-mode {
 body.dark-mode a {
   color: #eee;
 }
-body.dark-mode button {
+body.dark-mode button:not(.navbar-toggler) {
   background-color: #eee;
   color: #111;
 }

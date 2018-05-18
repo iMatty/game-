@@ -84,8 +84,15 @@
                         <tr ng-repeat="i in game | unique: 'app'">
                             <td>{{i.name}}</td>
                             <td>{{i.type}}</td>
-                            <td>{{i.price}} <b ng-if="i.sale" style="color:red; font-size:0.65em">SALE</b></td>
-                            <td><a target="_blanc" ng-href="{{i.link}}">{{i.platform}} <span class="fa fa-external-link" style="font-size:0.65em;font-weight:bold"></span></a></td>
+                            <td>
+								{{i.price}}
+								<b ng-if="i.sale" style="color:red; font-size:0.65em">SALE</b>
+							</td>
+                            <td>
+								<a target="_blanc" ng-href="{{i.link}}">{{i.platform}}
+									<span class="fa fa-external-link" style="font-size:0.65em;font-weight:bold"></span>
+								</a>
+							</td>
                         </tr>
                     </tbody>
                 </table>
