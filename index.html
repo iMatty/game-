@@ -16,16 +16,45 @@
     <script src="./js/angular-datatables.min.js"></script>
     <script src="./js/datatables.bootstrap4.min.js"></script>
 	<script src="./js/dark_light.js"></script>
-	<script src="./js/login.js"></script>
     <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
-	<link rel="stylesheet" href="./css/dark_light.css">
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<meta name="google-signin-client_id" content="6158674677-00kgvn6e7iibnbmn3encnpg6nfin7uvs.apps.googleusercontent.com.apps.googleusercontent.com">
+	<link rel="stylesheet" href="./css/dark_light.css">	
+	
+	<meta id="signInMeta" name="google-signin-client_id">
+	<script>
+		var meta = document.getElementById("signInMeta");
+		switch(window.location.hostname) {
+			case "imatty.github.io":
+				meta.content = "1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com";
+				break;
+			case "rainbow.nazwa.pl":
+				meta.content = "1008872979554-fl0anjm15o3jbikaa2mrocicl2cou16a.apps.googleusercontent.com";
+				break;
+			case "www.resourceries.com":
+				meta.content = "1008872979554-c5a5qejg95gbqhsak8frbl8cvik3rb79.apps.googleusercontent.com";
+				break;
+		}
+	</script>
 </head>
 
 <body id="body" class="light-mode">
 
+
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="">
+			<img src="img/logo.svg" alt="logo" />
+		</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+				<li id="account" class="nav-item dropdown"></li>
+            </ul>
+        </div>
+    </nav>
+	<!-- <nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="">
@@ -41,7 +70,7 @@
 				<li><button type="button" class="btn btn-default" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">Light/Dark</button></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> -->
 	
     <div class="container-fluid" ng-app="gamesApi">
         <div class="row" style="margin-top: 50px" ng-controller="steamApiCtrl">
@@ -107,6 +136,8 @@
     </div>
   </div>
 </div>
+	<script src="js/googleLogin.js"></script>
+	<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="./js/games-api.js"></script>
 </body>
 </html>
