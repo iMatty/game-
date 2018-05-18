@@ -16,8 +16,11 @@
     <script src="./js/angular-datatables.min.js"></script>
     <script src="./js/datatables.bootstrap4.min.js"></script>
 	<script src="./js/dark_light.js"></script>
+	<script src="./js/login.js"></script>
     <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
 	<link rel="stylesheet" href="./css/dark_light.css">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="6158674677-00kgvn6e7iibnbmn3encnpg6nfin7uvs.apps.googleusercontent.com.apps.googleusercontent.com">
 </head>
 
 <body id="body" class="light-mode">
@@ -33,7 +36,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><button type="button" class="btn btn-default">Contact</button></li>
 				<div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
-				<li><button type="submit" class="btn btn-default">Login</button></li>
+				<li><button type="submit" class="btn btn-default" class="btn btn-primary" data-toggle="modal" data-target="#LoginModal">Login</button></li>
 				<div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
 				<li><button type="button" class="btn btn-default" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">Light/Dark</button></li>
 			</ul>
@@ -84,6 +87,26 @@
             <div class="col-2"></div>
         </div>
     </div>
+	
+	<!-- Login Modal -->
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Login with Google!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="./js/games-api.js"></script>
 </body>
 </html>
