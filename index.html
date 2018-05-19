@@ -84,9 +84,9 @@
                         <tr ng-repeat="i in game | unique: 'app'">
                             <td>{{i.name}}</td>
                             <td>{{i.type}}</td>
-                            <td>
+                            <td style="white-space: nowrap">
 								{{i.price}}
-								<b ng-if="i.sale" style="transform: rotate(90deg); color:red; font-size:0.65em">SALE</b>
+								<b ng-if="i.sale" style="color:red; font-size:0.65em">SALE</b>
 							</td>
                             <td>
 								<a target="_blanc" ng-href="{{i.link}}">
