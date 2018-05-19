@@ -13,6 +13,9 @@ body.dark-mode button:not(.navbar-toggler) {
   background-color: #eee;
   color: #111;
 }
+.table-dark {
+  background-color: #111;
+}
 
 /*//////////////////////////////////////////////*/
 
