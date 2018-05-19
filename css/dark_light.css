@@ -6,15 +6,11 @@ body.dark-mode {
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
-body.dark-mode a {
+body.dark-mode table a {
   color: #eee;
 }
 body.dark-mode button:not(.navbar-toggler) {
   background-color: #eee;
-  color: #111;
-}
-
-body.dark-mode table.a {
   color: #111;
 }
 
@@ -28,7 +24,7 @@ body.light-mode {
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
-body.light-mode a {
+body.light-mode table a {
   color: #111;
 }
 body.light-mode button:not(.navbar-toggler) {
