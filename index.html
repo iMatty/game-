@@ -18,7 +18,7 @@
 	<script src="./js/dark_light.js"></script>
     <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
 	<link rel="stylesheet" href="./css/dark_light.css">	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
 	
 	<meta id="signInMeta" name="google-signin-client_id">
 	<script>
@@ -54,8 +54,8 @@
 				<li id="account" class="nav-item dropdown"></li>
             </ul>
         </div>
-		<button id="darkLightToggle" style="position:fixed;bottom:1%;right:1%;z-index:10" type="button" class="btn btn-default" name="dark_light"
-				onclick="toggleDarkLight()" title="Toggle dark/light mode">dark mode</button>
+		<button id="darkLightToggle" type="button" class="btn btn-default" name="dark_light"
+				onclick="toggleDarkLight()" title="Toggle dark/light mode"><i class='fa fa-lightbulb-o fa-2x'></i></button>
     </nav>
 	
     <div style="margin-bottom: 4em" class="container-fluid" ng-app="gamesApi">
@@ -86,12 +86,12 @@
                             <td>{{i.type}}</td>
                             <td style="white-space: nowrap">
 								{{i.price}}
-								<b ng-if="i.sale" style="color:red; font-size:0.65em">SALE</b>
+								<span ng-if="i.sale" class="badge badge-danger">SALE</span>
 							</td>
                             <td>
 								<a target="_blanc" ng-href="{{i.link}}">
 									{{i.platform}}
-									<span class="fa fa-external-link" style="font-size:0.65em; font-weight:bold"></span>
+									<i class="fa fa-external-link fa-sm"></i>
 								</a>
 							</td>
                         </tr>

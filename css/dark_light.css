@@ -1,3 +1,17 @@
+#darkLightToggle {
+  display: block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 10;
+
+}
+
+/*DARK MODE*/
+
 body.dark-mode {
   background-color: #111;
   color: #eee;
@@ -17,7 +31,7 @@ body.dark-mode button:not(.navbar-toggler) {
   background-color: #111;
 }
 
-/*//////////////////////////////////////////////*/
+/*LIGHT MODE*/
 
 body.light-mode {
   background-color: #eee;
