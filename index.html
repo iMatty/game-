@@ -22,21 +22,7 @@
     <link rel="stylesheet" href="./css/dark_light.css">
     <link rel="stylesheet" href="./css/font-awesome.min.css">
 
-    <meta id="signInMeta" name="google-signin-client_id">
-    <script>
-        var meta = document.getElementById("signInMeta");
-        switch (window.location.hostname) {
-            case "imatty.github.io":
-                meta.content = "1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com";
-                break;
-            case "rainbow.nazwa.pl":
-                meta.content = "1008872979554-fl0anjm15o3jbikaa2mrocicl2cou16a.apps.googleusercontent.com";
-                break;
-            case "www.resourceries.com":
-                meta.content = "1008872979554-c5a5qejg95gbqhsak8frbl8cvik3rb79.apps.googleusercontent.com";
-                break;
-        }
-    </script>
+    <meta id="signInMeta" name="google-signin-client_id" content="1008872979554-fl0anjm15o3jbikaa2mrocicl2cou16a.apps.googleusercontent.com">
 </head>
 
 <body id="body" class="light-mode">
@@ -109,19 +95,6 @@
     <script src="./js/contact.js"></script>
     <script src="js/googleLogin.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAnx_eCD785_PlFfU4QBOMsM_D1FDdFx8E",
-            authDomain: "games-1525530612060.firebaseapp.com",
-            databaseURL: "https://games-1525530612060.firebaseio.com",
-            projectId: "games-1525530612060",
-            storageBucket: "games-1525530612060.appspot.com",
-            messagingSenderId: "1008872979554"
-        };
-        firebase.initializeApp(config);
-    </script>
 </body>
 
 </html>
