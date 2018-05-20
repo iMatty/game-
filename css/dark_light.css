@@ -1,3 +1,16 @@
+#darkLightToggle {
+  display: block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 10;
+}
+
+/*DARK MODE*/
+
 body.dark-mode {
   background-color: #111;
   color: #eee;
@@ -10,14 +23,21 @@ body.dark-mode table a {
   color: #eee;
 }
 body.dark-mode button:not(.navbar-toggler) {
-  background-color: #eee;
+  background-color: #fff;
   color: #111;
 }
-.table-dark {
+body.dark-mode .table-dark {
   background-color: #111;
 }
+body.dark-mode .tooltip .tooltip-inner {
+  background-color: #fff;
+  color: #111;
+}
+body.dark-mode .tooltip .arrow::before {
+  border-left-color: #fff;
+}
 
-/*//////////////////////////////////////////////*/
+/*LIGHT MODE*/
 
 body.light-mode {
   background-color: #eee;
@@ -31,8 +51,15 @@ body.light-mode table a {
   color: #111;
 }
 body.light-mode button:not(.navbar-toggler) {
-  background-color: #111;
+  background-color: #000;
   color: #eee;
+}
+body.light-mode .tooltip .tooltip-inner {
+  background-color: #000;
+  color: #eee;
+}
+body.light-mode .tooltip .arrow::before {
+  border-left-color: #000;
 }
 
 
