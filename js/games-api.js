@@ -1,14 +1,24 @@
-angular.module("gamesApi", ["angular.filter", "datatables"])
+angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute"])
+    .config(function ($routeProvider, $locationProvider) {
+        $locationProvider.hashPrefix("");
+        $routeProvider
+            .when("/", {
+                templateUrl: "../table.html"
+            })
+            .otherwise({
+                redirectTo: "/"
+            });
+    })
     .run(function ($rootScope) {
         $rootScope.steamReady = true;
         $rootScope.galaxyReady = true;
-        $rootScope.dtOptions = { 
+        $rootScope.dtOptions = {
             searching: false,
             destroy: true,
             language: {
                 emptyTable: "No results found",
                 info: "Total results found: _MAX_",
-                infoEmpty: "",
+                infoEmpty: ""
             }
         };
     })
@@ -25,7 +35,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
         };
     })
     .factory("gameListService", function () {
-        var list = { 
+        var list = {
             gameList: [],
             steamReady: false,
             galaxyReady: false
@@ -111,7 +121,7 @@ angular.module("gamesApi", ["angular.filter", "datatables"])
             } else {
                 $rootScope.steamReady = true;
             }
-            
+
         };
     })
     .controller("galaxyApiCtrl", function ($scope, $rootScope, $http, $filter, searchService, gameListService) {
