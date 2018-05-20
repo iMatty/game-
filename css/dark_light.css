@@ -23,7 +23,7 @@ body.dark-mode table a {
   color: #eee;
 }
 body.dark-mode button:not(.navbar-toggler) {
-  background-color: #eee;
+  background-color: #fff;
   color: #111;
 }
 body.dark-mode .table-dark {
@@ -51,7 +51,7 @@ body.light-mode table a {
   color: #111;
 }
 body.light-mode button:not(.navbar-toggler) {
-  background-color: #111;
+  background-color: #000;
   color: #eee;
 }
 body.light-mode .tooltip .tooltip-inner {
