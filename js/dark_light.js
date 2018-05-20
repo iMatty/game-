@@ -1,6 +1,9 @@
 $(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'hover'
+  });
   $("#darkLightToggle").click(function () {
-    if($("body").hasClass("light-mode")) {
+    if ($("body").hasClass("light-mode")) {
       $("body").removeClass("light-mode").addClass("dark-mode");
       $("#gamesTable").toggleClass("table-dark");
     } else {
