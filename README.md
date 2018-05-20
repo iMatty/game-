@@ -1,2 +1,0 @@
-# game-
-UEK SPA project
