@@ -89,8 +89,15 @@
 }
 .owl-carousel-hide {
     opacity: 0 !important;
+    visibility: hidden !important;
+}
+.owl-carousel-hide img {
+    width: 0 !important;
+    height: 0 !important;
 }
 .owl-carousel-show {
     opacity: 1 !important;
-    transition: opacity 0.5s;
+    visibility: visible !important;
+    transition: visibility 0.5s, opacity 0.5s;
+    transition-delay: 0.5s;
 }
