@@ -1,127 +1,100 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>game$</title>
-  <meta name="description" content="game$ main page">
-  <meta name="author" content="-">
-  
-  <meta name="google-signin-client_id" content="1008872979554-m83dtbdte9j56b79hc4niact6vckkvnu.apps.googleusercontent.com">
-
-</head>
-
-</html>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="gamesApi">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game$</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.datatables.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/angular-route.min.js"></script>
+    <script src="./js/angular-filter.min.js"></script>
+    <script src="./js/angular-datatables.min.js"></script>
+    <script src="./js/datatables.bootstrap4.min.js"></script>
+    <script src="./js/games-api.js"></script>
+    <script src="./js/dark_light.js"></script>
+    <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./css/dark_light.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
 
-  <title>Game$</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="js/angular.min.js"></script>
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/script.js"></script>
-  <link rel="stylesheet" href="css/styleToSample.css" type="text/css"/>
-
+    <meta name="google-signin-client_id" content="1008872979554-1kiqs60c3bigue68t0cl92nq5v6dh0d7.apps.googleusercontent.com">
 </head>
-<body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                       
-      </button>
-	  <a href="index.html"><img src="img/logo.png" height="70" width="220"/></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-   
-      <ul class="nav navbar-nav navbar-right">
-		<li><a href="#" id="contact">Contact</a></li>
-        <li id="signInOut"></li>
-		<script>
-			var signInButton = document.getElementById("signInOut");
-		
-			function onSuccess(googleUser) {
-				console.log("signing in");
-				signInButton.innerHTML = '<a href="#" onclick="onFailure();">' + 
-									googleUser.getBasicProfile().getName() + '&#9660;</a>';
-			}
-			function onFailure() {
-				console.log("signing out");
-				var auth2 = gapi.auth2.getAuthInstance();
-				auth2.signOut().then(function () {
-					 renderButton();
-				});
-			}
-			function renderButton() {
-				signInButton.innerHTML = '<a id="my-signin2"></a>';
-				gapi.signin2.render('my-signin2', {
-					'scope': 'profile email',
-					'width': 120,
-					'height': 25,
-					'longtitle': false,
-					'theme': 'light',
-					'onsuccess': onSuccess,
-					'onfailure': onFailure
-				});
-			}
-		</script>
-		<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div id="page" class="container-fluid text-center">    
-  <div class="row content">
-		<p id="logo_2">Game$</p>
-		</hr>
-		
-<form>
-  <div class="input-group col-sm-3" >
-    <input type="text" class="form-control" placeholder="Search">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit">
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
-  </div>
-</div>
+<body id="body" class="light-mode">
 
-<section id="contact_info" class="content-section text-center">
-        <div class="contact-section">
-            <div class="container">
-              <h2>Contact Us</h2>
-              <p>Feel free to shout us by feeling the contact form</p>
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <form class="form-horizontal">
-                    <div class="form-group">
-                      <label for="exampleInputName2">Name</label>
-                      <input type="text" class="form-control" id="exampleInputName2" placeholder="Janusz Nowak">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail2">Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Janusz.Nowak@example.com">
-                    </div>
-                    <div class="form-group ">
-                      <label for="exampleInputText">Your Message</label>
-                     <textarea  class="form-control" placeholder="Description"></textarea> 
-                    </div>
-                    <button type="submit" class="btn btn-default">Send Message</button>
-                  </form>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#/">
+            <img style="margin-bottom:0.2em" src="img/logo.svg" alt="logo" />
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-tem">
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#contactModal">Contact</a>
+                </li>
+
+                <li id="account" class="nav-item dropdown"></li>
+            </ul>
+        </div>
+        <button id="darkLightToggle" type="button" class="btn btn-default" name="dark_light" data-toggle="tooltip" data-placement="left"
+            title="Toggle dark mode">
+            <i class='fa fa-lightbulb-o fa-2x'></i>
+        </button>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div id="infoBar" class="mx-auto"></div>
+    </div>
+
+    <div ng-view></div>
+
+    <div class="modal fade" id="contactModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Contact us</h4>
                 </div>
-              </div>
+
+                <div class="modal-body">
+                    <form action="" role="form" method="post" id="reused_form">
+                        <p> Send your message in the form below and we will get back to you as early as possible.</p>
+
+                        <div class="form-group">
+                            <label for="name">Nickname: </label>
+                            <input type="text" class="form-control" name="name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail: </label>
+                            <input type="email" class="form-control" name="email" />
+                        </div>
+                        <div class="form-group">
+                            <label>Your message: </label>
+                            <textarea name="message" type="text" class="form-control" /></textarea>
+                        </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btnContactUs">Send</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+                </form>
             </div>
         </div>
-      </section>
-	  
-<button id="lightsButton" style="position: absolute; left: 95%; right: 20%; bottom: 3%;">Light</button>
+    </div>
+
+    <script src="./js/contact.js"></script>
+    <script src="js/googleLogin.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
+
 </html>
