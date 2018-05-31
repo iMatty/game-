@@ -26,8 +26,8 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage">
                             <div owl-carousel-item ng-repeat="i in carouselList" class="item owl-carousel-style">
-                                <img src="{{i.header_image}}">
-                                <a href="https://store.steampowered.com/app/{{i.id}}" target="_blank">
+                                <img ng-src="{{i.header_image}}">
+                                <a ng-href="https://store.steampowered.com/app/{{i.id}}" target="_blank">
                                     <div class="owl-carousel-text">
                                         <p class="owl-carousel-discount">-{{i.discount_percent}}%</p>
                                         <p class="owl-carousel-price"><span class="original-price">{{i.original_price / 100 | number: 2}}</span> {{i.final_price / 100 | number: 2}}<span class="currency">{{i.currency}}</span></p>
