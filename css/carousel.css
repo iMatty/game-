@@ -87,3 +87,10 @@
 .owl-stage:focus .owl-next  {
     opacity: 1;
 }
+.owl-carousel-hide {
+    opacity: 0 !important;
+}
+.owl-carousel-show {
+    opacity: 1 !important;
+    transition: opacity 0.5s;
+}

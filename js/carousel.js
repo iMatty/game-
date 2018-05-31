@@ -55,7 +55,8 @@ angular.module("carousel", [])
                             defaultOptions[key] = customOptions[key];
                         }
                         $(element).owlCarousel(defaultOptions);
-                    }, 100);
+                        scope.carouselShow = true;
+                    }, 50);
                 };
             }
         };

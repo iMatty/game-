@@ -21,7 +21,7 @@
 <body>
     <div class="container-fluid">
         <div class="row" style="margin-top: 80px">
-            <div class="col" ng-app="carousel" ng-controller="carouselCtrl">
+            <div class="col" ng-app="carousel" ng-controller="carouselCtrl" ng-init="carouselShow = false" ng-class="carouselShow ? 'owl-carousel-show' : 'owl-carousel-hide'">
                 <owl-carousel class="owl-carousel owl-loaded">
                     <div class="owl-stage-outer">
                         <div class="owl-stage">
