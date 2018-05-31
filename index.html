@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carousel</title>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/owl.carousel.min.js"></script>
+    <script src="./js/carousel.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./css/carousel.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 80px">
+            <div class="col" ng-app="carousel" ng-controller="carouselCtrl">
+                <owl-carousel class="owl-carousel owl-loaded">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage">
+                            <div owl-carousel-item ng-repeat="i in carouselList" class="item owl-carousel-style">
+                                <img src="{{i.header_image}}">
+                                <a href="https://store.steampowered.com/app/{{i.id}}" target="_blank">
+                                    <div class="owl-carousel-text">
+                                        <p class="owl-carousel-discount">-{{i.discount_percent}}%</p>
+                                        <p class="owl-carousel-price"><span class="original-price">{{i.original_price / 100 | number: 2}}</span> {{i.final_price / 100 | number: 2}}<span class="currency">{{i.currency}}</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </owl-carousel>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
