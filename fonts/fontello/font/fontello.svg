@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="eye" unicode="&#xe800;" d="M488 695c291 0 487-340 487-340s-196-339-487-339-488 339-488 339 196 340 488 340z m0-579c131 0 238 108 238 239s-107 239-238 239-239-108-239-239 107-239 239-239z m107 239c0-59-50-106-107-106-59 0-107 47-107 106 0 57 48 107 107 107 57 0 107-50 107-107z" horiz-adv-x="975" />
+
+<glyph glyph-name="eye-1" unicode="&#xe801;" d="M500 630q92 0 177-25t141-62 99-77 63-71 20-45-20-44-63-71-99-78-141-62-177-25-177 25-141 62-99 78-63 71-20 44 20 45 63 71 99 77 141 62 177 25z m0-494q92 0 157 63t65 151q0 90-65 153t-157 63-157-63-65-153q0-88 65-151t157-63z m0 214q8-8 37-2t50 11 25-9q0-44-33-75t-79-31-78 31-32 75q0 46 32 77t78 31q14 0 10-23t-12-47 2-38z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>
