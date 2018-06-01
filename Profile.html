@@ -38,15 +38,27 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+		<ul class=" navbar-nav user">
+			<li class="user">Logged as {...}</li>
+		</ul>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
+ 	    <ul class="navbar-nav ml-right">
+		 <li class="nav-tem mr-right profile">
+                    <a class="nav-link" href="" data-toggle="collapse" data-target="#">Profile</a>
+                </li>
+	    </ul>
+               
             <ul class="navbar-nav ml-auto">
+           
                 <li class="nav-tem">
                     <a class="nav-link" href="" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
 
-                <li id="account" class="nav-item dropdown"></li>
+               <li class="nav-tem">
+                    <a class="nav-link" href="" data-toggle="collapse" data-target="#">Logout</a>
+                </li>
             </ul>
-        </div>
+
         <button id="darkLightToggle" type="button" class="btn btn-default" name="dark_light" data-toggle="tooltip" data-placement="left"
             title="Toggle dark mode">
             <i class='fa fa-lightbulb-o fa-2x'></i>
