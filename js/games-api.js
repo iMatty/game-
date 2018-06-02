@@ -10,6 +10,8 @@ angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute"])
             });
     })
     .run(function ($rootScope) {
+		$rootScope.user = null;
+		
         $rootScope.steamReady = true;
         $rootScope.galaxyReady = true;
         $rootScope.dtOptions = {
@@ -180,4 +182,61 @@ angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute"])
             }
             $scope.game = gameListService.getList();
         };
-    });
+    })
+	.controller("authentication", ["$scope", "$rootScope", function($scope, $rootScope) {
+		$scope.loginReady = false;
+		$scope.ui;
+		$scope.uiConfig;
+		$scope.logout = function() {
+			firebase.auth().signOut();
+		}
+		$scope.start = function() {
+			$scope.configureFirebaseUI();
+			$scope.registerListener();
+		}
+		$scope.configureFirebaseUI = function() {
+			$scope.uiConfig = {
+				callbacks: {
+					signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+						$('#signInModal').modal('hide');
+						return false;
+					}
+				},
+				signInFlow: 'popup',
+				signInOptions: [
+					firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+					{
+						provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+						scopes: [
+							'public_profile',
+							'email' ]
+					},
+					firebase.auth.GithubAuthProvider.PROVIDER_ID,
+				],
+				tosUrl: 'http://rainbow.nazwa.pl/terms-of-service'
+			};
+
+			$scope.ui = new firebaseui.auth.AuthUI(firebase.auth());
+		}
+		$scope.registerListener = function() {
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					// User is signed in.
+					$rootScope.user = user;
+					$scope.loginReady = true;
+					$scope.$apply();
+				} else {
+					// User is signed out.
+					if(!$scope.ui.isPendingRedirect()) {
+						$scope.ui.start('#firebaseui-auth-container', $scope.uiConfig);
+					}
+					$rootScope.user = null;
+					$scope.loginReady = true;
+					$scope.$apply();
+				}
+			}, function(error) {
+				console.log(error);
+			});
+		}
+		$scope.start();
+	}]);
