@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.modal').on('hidden.bs.modal', function () {
+    $('#contactModal').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
     });
     $("#reused_form").submit(function (e) {
