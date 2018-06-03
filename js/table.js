@@ -10,11 +10,12 @@ angular.module("table", ["angular.filter", "datatables"])
             }
         };
     })
-    .controller("tableCtrl", function ($scope, $http, $timeout, $filter) {
+    .controller("tableCtrl", function ($scope, $http, $q, $timeout, $filter) {
 
         var initialized = false;
         var data = [];
         var steamApi = [];
+        var canceler = $q.defer();
 
         $http.get("../data/steam-min.json")
             .then(function (response) {
@@ -33,6 +34,8 @@ angular.module("table", ["angular.filter", "datatables"])
             if (initialized) {
                 $scope.galaxyReady = false;
                 $scope.steamReady = false;
+                canceler.resolve();
+                canceler = $q.defer();
                 data = [];
                 $scope.data = data;
                 if ($scope.search.length >= 3) {
@@ -51,7 +54,7 @@ angular.module("table", ["angular.filter", "datatables"])
 
         function getGalaxySearchList() {
             let galaxySearchList = [];
-            $http.get("http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search)
+            $http({method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search, timeout: canceler.promise})
                 .then(function (response) {
                     for (let i = 0; i < response.data.products.length; i++) {
                         galaxySearchList.push(response.data.products[i]);
@@ -71,7 +74,7 @@ angular.module("table", ["angular.filter", "datatables"])
 
         function getGalaxyGameList(galaxySearchList) {
             if (galaxySearchList.length != 0) {
-                $http.get("http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + galaxySearchList.map(id => id.id).join(","))
+                $http({method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise})
                     .then(function (response) {
                         for (let i = 0; i < response.data.length; i++) {
                             data.push({
@@ -86,7 +89,7 @@ angular.module("table", ["angular.filter", "datatables"])
                         }
                         $scope.galaxyReady = true;
                     })
-                    .catch(function (response) { $scope.galaxyReady = true; })
+                    .catch(function (response) { })
             } else {
                 $scope.galaxyReady = true;
             }
@@ -94,7 +97,7 @@ angular.module("table", ["angular.filter", "datatables"])
 
         function getSteamGameList(steamSearchList, mapList) {
             if (mapList.length != 0) {
-                $http.get("http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview")
+                $http({method: "GET", url: "http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview", timeout: canceler.promise})
                     .then(function (response) {
                         for (let i = 0; i < mapList.length; i++) {
                             if (response.data[mapList[i]].success) {
@@ -111,7 +114,7 @@ angular.module("table", ["angular.filter", "datatables"])
                         }
                         $scope.steamReady = true;
                     })
-                    .catch(function (response) { $scope.steamReady = true; })
+                    .catch(function (response) { })
             } else {
                 $scope.steamReady = true;
             }
