@@ -54,8 +54,8 @@
 						<a ng-if="user != null" href="#/" class="nav-link dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.displayName}}</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item">My account</a>
-							<a class="dropdown-item" ng-click="logout()">Sign out</a>
+							<a class="dropdown-item" href="#/">My account</a>
+							<a class="dropdown-item" ng-click="logout()" href="#/">Sign out</a>
 						</div>
 						
 						<div class="modal fade" id="signInModal">
