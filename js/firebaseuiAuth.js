@@ -22,8 +22,10 @@ angular.module("firebaseuiAuth", [])
 							return false;
 						}
 					},
+					credentialHelper: firebaseui.auth.CredentialHelper.NONE,
 					signInFlow: 'popup',
 					signInOptions: [
+						firebase.auth.EmailAuthProvider.PROVIDER_ID,
 						firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 						{
 							provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
