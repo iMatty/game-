@@ -29,6 +29,8 @@
 	<script src="./js/firebaseInitialize.js"></script>
 	<script src="./js/firebaseui.js"></script>
 	<link rel="stylesheet" href="./css/firebaseui.css">
+	
+	<script src="./js/firebaseuiAuth.js"></script>
 </head>
 
 <body id="body" class="light-mode">
@@ -47,15 +49,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#/" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
-				<li class="nav-item" ng-controller="authentication">
-					<img ng-show="!loginReady" class="nav-link" style="height:2.5em" src="img/loading.gif" alt="loading..." />
-					<div ng-show="loginReady" class="ng-cloak">
-						<a ng-if="user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
-						<a ng-if="user != null" href="#/" class="nav-link dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.displayName}}</a>
+				<li class="nav-item">
+					<img ng-show="!auth.loginReady" class="nav-link" style="height:2.5em" src="img/loading.gif" alt="loading..." />
+					<div ng-show="auth.loginReady" class="ng-cloak">
+						<a ng-if="auth.user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
+						<a ng-if="auth.user != null" href="#/" class="nav-link dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{auth.user.displayName}}</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<a class="dropdown-item" href="#/">My account</a>
-							<a class="dropdown-item" ng-click="logout()" href="#/">Sign out</a>
+							<a class="dropdown-item" ng-click="auth.signOut()" href="#/">Sign out</a>
 						</div>
 						
 						<div class="modal fade" id="signInModal">
@@ -67,7 +69,7 @@
 									</div>
 
 									<div class="modal-body">
-										<div id="firebaseui-auth-container"></div>
+										<firebaseui-auth></firebaseui-auth>
 									</div>
 
 									<div class="modal-footer">
