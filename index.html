@@ -9,7 +9,7 @@
     <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/angular.min.js"></script>
-    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
     <script src="./js/owl.carousel.min.js"></script>
     <script src="./js/carousel.js"></script>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row" style="margin-top: 80px">
             <div class="col" ng-app="carousel" ng-controller="carouselCtrl" ng-init="carouselShow = false" ng-class="carouselShow ? 'owl-carousel-show' : 'owl-carousel-hide'">
-                <owl-carousel class="owl-carousel owl-loaded">
+                <owl-carousel ng-cloak class="owl-carousel owl-loaded">
                     <div class="owl-stage-outer">
                         <div class="owl-stage">
                             <div owl-carousel-item ng-repeat="i in carouselList" class="item owl-carousel-style">
