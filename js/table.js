@@ -17,7 +17,8 @@ angular.module("table", ["angular.filter", "datatables"])
         var steamApi = [];
         var canceler = $q.defer();
 
-        $http.get("../data/steam-min.json")
+
+        $http.get("../data/steam.min.json")
             .then(function (response) {
                 for (let i = 0; i < response.data.applist.apps.length; i++) {
                     steamApi.push({
@@ -40,7 +41,7 @@ angular.module("table", ["angular.filter", "datatables"])
                 $scope.data = data;
                 if ($scope.search.length >= 3) {
                     getGalaxySearchList();
-                    getSteamSearchList();
+                    getSteamStoreList()
                 } else {
                     $scope.galaxyReady = true;
                     $scope.steamReady = true;
@@ -54,7 +55,7 @@ angular.module("table", ["angular.filter", "datatables"])
 
         function getGalaxySearchList() {
             let galaxySearchList = [];
-            $http({method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search, timeout: canceler.promise})
+            $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search, timeout: canceler.promise })
                 .then(function (response) {
                     for (let i = 0; i < response.data.products.length; i++) {
                         galaxySearchList.push(response.data.products[i]);
@@ -64,17 +65,9 @@ angular.module("table", ["angular.filter", "datatables"])
                 .catch(function (response) { })
         };
 
-        function getSteamSearchList() {
-            let steamSearchList = [];
-            let mapList = [];
-            steamSearchList = $filter("filter")(steamApi, { search: $scope.search });
-            mapList = steamSearchList.map(id => id.app);
-            getSteamGameList(steamSearchList, mapList);
-        };
-
         function getGalaxyGameList(galaxySearchList) {
             if (galaxySearchList.length != 0) {
-                $http({method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise})
+                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise })
                     .then(function (response) {
                         for (let i = 0; i < response.data.length; i++) {
                             data.push({
@@ -84,7 +77,8 @@ angular.module("table", ["angular.filter", "datatables"])
                                 price: galaxySearchList[i].price.amount,
                                 sale: galaxySearchList[i].price.isDiscounted,
                                 platform: "GOG",
-                                link: "https://www.gog.com" + galaxySearchList[i].url
+                                link: "https://www.gog.com" + galaxySearchList[i].url,
+                                image: galaxySearchList[i].image + "_product_quartet_250.jpg"
                             });
                         }
                         $scope.galaxyReady = true;
@@ -95,9 +89,35 @@ angular.module("table", ["angular.filter", "datatables"])
             }
         };
 
+        function getSteamStoreList() {
+            let steamStoreList = [];
+            $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/storesearch/?term=" + $scope.search, timeout: canceler.promise })
+                .then(function (response) {
+                    for (let i = 0; i < response.data.items.length; i++) {
+                        let find = steamApi.find(id => (id.app == response.data.items[i].id));
+                        if (find != null) {
+                            steamStoreList.push(find);
+                        }
+                    }
+                    getSteamSearchList(steamStoreList);
+                })
+                .catch(function (response) { })
+        }
+
+        function getSteamSearchList(steamStoreList) {
+            let steamSearchList = [];
+            let mapList = [];
+            steamSearchList = $filter("filter")(steamApi, { search: $scope.search });
+            steamSearchList = steamStoreList.concat(steamSearchList);
+            steamSearchList = $filter("unique")(steamSearchList);
+            steamSearchList = $filter("limitTo")(steamSearchList, 50);
+            mapList = steamSearchList.map(id => id.app);
+            getSteamGameList(steamSearchList, mapList);
+        };
+
         function getSteamGameList(steamSearchList, mapList) {
             if (mapList.length != 0) {
-                $http({method: "GET", url: "http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview", timeout: canceler.promise})
+                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids=" + mapList.join(",") + "&filters=price_overview", timeout: canceler.promise })
                     .then(function (response) {
                         for (let i = 0; i < mapList.length; i++) {
                             if (response.data[mapList[i]].success) {
@@ -108,7 +128,8 @@ angular.module("table", ["angular.filter", "datatables"])
                                     price: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
                                     sale: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.discount_percent != 0 ? true : false) : false,
                                     platform: "Steam",
-                                    link: "https://store.steampowered.com/app/" + steamSearchList[i].app
+                                    link: "https://store.steampowered.com/app/" + steamSearchList[i].app,
+                                    image: "https://steamcdn-a.akamaihd.net/steam/apps/" + steamSearchList[i].app + "/header.jpg"
                                 });
                             }
                         }

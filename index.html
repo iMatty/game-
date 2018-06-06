@@ -25,18 +25,20 @@
     <div class="container-fluid">
         <div ng-app="table" ng-controller="tableCtrl" ng-init="search = ''; data = []; galaxyReady = true; steamReady = true">
             <div class="row justify-content-center" style="margin-top: 80px">
-                <div class="col-8">
+                <div class="col-sm-10 col-md-8 col-lg-6">
                     <div class="input-group">
                         <input autofocus type="text" class="form-control" placeholder="Search..." ng-model="search" ng-model-options="{debounce: 800}">
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-10 table-holder">
+            <div ng-cloak class="row justify-content-center">
+                <div class="col-sm-12 col-md-10 col-lg-8 table-holder">
                     <div ng-class="(!galaxyReady || !steamReady) ? 'table-loader-show' : 'table-loader-hide'"></div>
-                    <div ng-class="(galaxyReady && steamReady && data.length == 0 && search.length >= 3) ? 'table-zero-show' : 'table-zero-hide'"><span>No results found.</span></div>
+                    <div ng-class="(galaxyReady && steamReady && data.length == 0 && search.length >= 3) ? 'table-zero-show' : 'table-zero-hide'">
+                        <span>No results found.</span>
+                    </div>
                     <div ng-class="(galaxyReady && steamReady && data.length != 0) ? 'table-show' : 'table-hide'">
-                        <table id="dataTable" datatable="ng" dt-options="dtOptions" class="table table-striped table-hover" style="width: 100%">
+                        <table id="dataTable" datatable="ng" dt-options="dtOptions" class="table table-striped table-hover table-style">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -46,8 +48,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="i in data | unique: 'app'">
-                                    <td ng-bind="i.name"></td>
+                                <tr ng-repeat="i in data">
+                                    <td>
+                                        <img ng-src="{{i.image}}">
+                                        <span ng-bind="i.name"></span>
+                                    </td>
                                     <td ng-bind="i.type"></td>
                                     <td style="white-space: nowrap">
                                         <span ng-bind="(i.price) + ' PLN'"></span>

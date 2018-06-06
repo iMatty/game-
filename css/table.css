@@ -1,3 +1,6 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
 .table-holder {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -35,4 +38,10 @@
 }
 .table-hide {
     display: none !important;
+}
+.table-style {
+    width: 100%;
+}
+.table-style img {
+    height: 50px;
 }
