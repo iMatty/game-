@@ -1,4 +1,4 @@
-angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute", "firebaseuiAuth"])
+angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute", "firebaseuiAuth", "loadingIcon"])
     .config(function ($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix("");
         $routeProvider

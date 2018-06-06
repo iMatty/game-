@@ -31,6 +31,7 @@
 	<link rel="stylesheet" href="./css/firebaseui.css">
 	
 	<script src="./js/firebaseuiAuth.js"></script>
+	<script src="./js/loadingIconModule.js"></script>
 </head>
 
 <body id="body" class="light-mode">
@@ -50,7 +51,7 @@
                     <a class="nav-link" href="#/" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
 				<li class="nav-item">
-					<img ng-show="!auth.loginReady" class="nav-link" style="height:2.5em" src="img/loading.gif" alt="loading..." />
+					<loading-icon ng-show="!auth.loginReady" style="display:inline-block; padding-top:0.5em; height:1.5em; width:1.5em" data-color="'#eeeeee'"></loading-icon>
 					<div ng-show="auth.loginReady" class="ng-cloak">
 						<a ng-if="auth.user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
 						<a ng-if="auth.user != null" href="#/" class="nav-link dropdown-toggle"
