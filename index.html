@@ -48,7 +48,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="i in data">
+                                <tr ng-repeat="i in data | unique: 'app'">
                                     <td>
                                         <img ng-src="{{i.image}}">
                                         <span ng-bind="i.name"></span>
