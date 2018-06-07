@@ -1,7 +1,7 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
-.table-holder {
+.table-margin {
     margin-top: 50px;
     margin-bottom: 50px;
 }

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div ng-cloak class="row justify-content-center">
-                <div class="col-sm-12 col-md-10 col-lg-8 table-holder">
+                <div class="col-sm-12 col-md-10 col-lg-8 table-margin">
                     <div ng-class="(!galaxyReady || !steamReady) ? 'table-loader-show' : 'table-loader-hide'"></div>
                     <div ng-class="(galaxyReady && steamReady && data.length == 0 && search.length >= 3) ? 'table-zero-show' : 'table-zero-hide'">
                         <span>No results found.</span>
@@ -49,20 +49,15 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="i in data | unique: 'app'">
-                                    <td>
-                                        <img ng-src="{{i.image}}">
-                                        <span ng-bind="i.name"></span>
-                                    </td>
-                                    <td ng-bind="i.type"></td>
+                                    <td><img ng-src="{{i.image}}"> {{i.name}}</td>
+                                    <td>{{i.type}}</td>
                                     <td style="white-space: nowrap">
-                                        <span ng-bind="(i.price) + ' PLN'"></span>
-                                        <span ng-if="i.sale" class="badge badge-danger">
-                                            <i class="fa fa-percent"></i>
-                                        </span>
+                                        <span>{{i.price}} PLN</span>
+                                        <span ng-if="i.sale != 0 ? true : false" class="badge badge-danger">-{{i.sale}}%</span>
                                     </td>
                                     <td style="white-space: nowrap">
                                         <a target="_blanc" ng-href="{{i.link}}">
-                                            <span ng-bind="i.platform"></span>
+                                            <span>{{i.platform}}</span>
                                             <i class="fa fa-external-link fa-sm"></i>
                                         </a>
                                     </td>

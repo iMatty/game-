@@ -75,7 +75,7 @@ angular.module("table", ["angular.filter", "datatables"])
                                 app: galaxySearchList[i].id,
                                 type: response.data[i].game_type,
                                 price: galaxySearchList[i].price.amount,
-                                sale: galaxySearchList[i].price.isDiscounted,
+                                sale: galaxySearchList[i].price.discountPercentage,
                                 platform: "GOG",
                                 link: "https://www.gog.com" + galaxySearchList[i].url,
                                 image: galaxySearchList[i].image + "_product_quartet_250.jpg"
@@ -126,7 +126,7 @@ angular.module("table", ["angular.filter", "datatables"])
                                     app: steamSearchList[i].app,
                                     type: steamSearchList[i].type,
                                     price: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
-                                    sale: response.data[mapList[i]].data.price_overview != undefined ? (response.data[mapList[i]].data.price_overview.discount_percent != 0 ? true : false) : false,
+                                    sale: response.data[mapList[i]].data.price_overview != undefined ? response.data[mapList[i]].data.price_overview.discount_percent : 0,
                                     platform: "Steam",
                                     link: "https://store.steampowered.com/app/" + steamSearchList[i].app,
                                     image: "https://steamcdn-a.akamaihd.net/steam/apps/" + steamSearchList[i].app + "/header.jpg"
