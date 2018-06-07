@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="./css/firebaseui.css">
 	
 	<script src="./js/firebaseuiAuth.js"></script>
-	<script src="./js/loadingIconModule.js"></script>
+	<script src="./js/loadingIcon/loadingIconModule.js"></script>
 </head>
 
 <body id="body" class="light-mode">
@@ -44,14 +44,15 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#/" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
 				<li class="nav-item">
-					<loading-icon ng-show="!auth.loginReady" style="display:inline-block; padding-top:0.5em; height:1.5em; width:1.5em" data-color="'#eeeeee'"></loading-icon>
+					<loading-icon ng-show="!auth.loginReady"
+							style="display:inline-block; padding-top:0.5em; height:1.5em; width:1.5em"
+							data-color="'#eee'"></loading-icon>
 					<div ng-show="auth.loginReady" class="ng-cloak">
 						<a ng-if="auth.user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
 						<a ng-if="auth.user != null" href="#/" class="nav-link dropdown-toggle"
