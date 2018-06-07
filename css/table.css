@@ -1,9 +1,16 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
-.table-margin {
+.table-style {
     margin-top: 50px;
     margin-bottom: 50px;
+}
+.table-style img {
+    height: 50px;
+    width: 107px;
+}
+.table-style .table td, .table th {
+    vertical-align: baseline !important;
 }
 .table-loader-show {
     margin: 0 auto;
@@ -34,14 +41,8 @@
     display: none !important;
 }
 .table-show {
-    
+
 }
 .table-hide {
     display: none !important;
-}
-.table-style {
-    width: 100%;
-}
-.table-style img {
-    height: 50px;
 }
