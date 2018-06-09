@@ -1,4 +1,4 @@
-angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute", "firebaseuiAuth", "loadingIcon"])
+angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute", "firebaseuiAuth", "observed", "loadingIcon"])
     .config(function ($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix("");
         $routeProvider
@@ -9,9 +9,12 @@ angular.module("gamesApi", ["angular.filter", "datatables", "ngRoute", "firebase
                 redirectTo: "/"
             });
     })
-    .run(function($rootScope, auth) {
-		$rootScope.auth = auth;
-		
+    .run(function($rootScope, auth, observedList) {
+		$rootScope.user = {
+			auth: auth,
+			observedList: observedList
+		};
+
         $rootScope.steamReady = true;
         $rootScope.galaxyReady = true;
         $rootScope.dtOptions = {

@@ -22,7 +22,11 @@
                 </thead>
                 <tbody ng-hide="!steamReady || !galaxyReady">
                     <tr ng-repeat="i in game | unique: 'app'">
-                        <td>{{i.name}}</td>
+                        <td style="position: relative">
+							{{i.name}}
+							<observed-button data-platform="i.platform" data-id="i.app"
+									style="position: absolute; top:0; right:0; width:1em; height: 1em;"></observed-button>
+						</td>
                         <td>{{i.type}}</td>
                         <td style="white-space: nowrap">
                             {{i.price}} zł

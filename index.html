@@ -32,6 +32,12 @@
 	
 	<script src="./js/firebaseuiAuth.js"></script>
 	<script src="./js/loadingIcon/loadingIconModule.js"></script>
+
+    <!-- observed module -->
+	<script src="js/observed/observed.module.js"></script>
+    <script src="js/observed/observedList.service.js"></script>
+    <script src="js/observed/observedButton.component.js"></script>
+    <script src="js/observed/observedButton.template.html"></script>
 </head>
 
 <body id="body" class="light-mode">
@@ -50,16 +56,16 @@
                     <a class="nav-link" href="#/" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
 				<li class="nav-item">
-					<loading-icon ng-show="!auth.loginReady"
+					<loading-icon ng-show="!user.auth.loginReady"
 							style="display:inline-block; padding-top:0.5em; height:1.5em; width:1.5em"
 							data-color="'#eee'"></loading-icon>
-					<div ng-show="auth.loginReady" class="ng-cloak">
-						<a ng-if="auth.user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
-						<a ng-if="auth.user != null" href="#/" class="nav-link dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{auth.user.displayName}}</a>
+					<div ng-show="user.auth.loginReady" class="ng-cloak">
+						<a ng-if="user.auth.user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
+						<a ng-if="user.auth.user != null" href="#/" class="nav-link dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.auth.user.displayName}}</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<a class="dropdown-item" href="#/">My account</a>
-							<a class="dropdown-item" ng-click="auth.signOut()" href="#/">Sign out</a>
+							<a class="dropdown-item" ng-click="user.auth.signOut()" href="#/">Sign out</a>
 						</div>
 						
 						<div class="modal fade" id="signInModal">
