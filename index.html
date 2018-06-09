@@ -150,7 +150,7 @@
                             <tbody>
                                 <tr ng-repeat="i in data | unique: 'app'">
                                     <td style="position: relative;">
-										<img style="float:left;" ng-src="{{i.image}}" /> 
+										<img ng-src="{{i.image}}" /> 
 										{{i.name}}
 										<observed-button data-platform="i.platform" data-id="i.app"
 												style="position: absolute; top:0; right:0; width:1em; height: 1em;"></observed-button>
