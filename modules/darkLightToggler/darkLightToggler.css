@@ -1,0 +1,73 @@
+#darkLightToggle {
+	display: block;
+	height: 3em;
+	width: 3em;
+	border-radius: 50%;
+	position: fixed;
+	bottom: 3em;
+	right: 3em;
+	z-index: 10;
+}
+
+/*DARK MODE*/
+
+body.dark-mode {
+  background-color: #111;
+  color: #eee;
+  transition: background-color 0.3s;
+}
+body.dark-mode table a {
+  color: #eee;
+}
+body.dark-mode #darkLightToggle {
+  background-color: #fff;
+  color: #111;
+}
+body.dark-mode .table-dark {
+  background-color: #111;
+}
+body.dark-mode .tooltip .tooltip-inner {
+  background-color: #fff;
+  color: #111;
+}
+body.dark-mode .tooltip .arrow::before {
+  border-left-color: #fff;
+}
+body.dark-mode .modal-body {
+  background-color: #1d1d1d;
+  color: #eee;
+}
+body.dark-mode .modal-footer {
+  background-color: #1d1d1d;
+  color: #eee;
+}
+
+/*LIGHT MODE*/
+
+body.light-mode {
+  background-color: #eee;
+  color: #111;
+  transition: background-color 0.3s;
+}
+body.light-mode table a {
+  color: #111;
+}
+body.light-mode #darkLightToggle {
+  background-color: #000;
+  color: #eee;
+}
+body.light-mode .tooltip .tooltip-inner {
+  background-color: #000;
+  color: #eee;
+}
+body.light-mode .tooltip .arrow::before {
+  border-left-color: #000;
+}
+body.light-mode .modal-body {
+  background-color: #eee;
+  color: #111;
+}
+body.light-mode .modal-footer {
+  background-color: #eee;
+  color: #111;
+}
