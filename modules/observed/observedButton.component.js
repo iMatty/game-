@@ -1,7 +1,7 @@
 angular.module("observed").component("observedButton", {
 		bindings: {
 			platform: "<",
-			id: "<",
+			app: "<",
 			type: "<",
 			removalOnly: "<"
 		},
@@ -11,14 +11,14 @@ angular.module("observed").component("observedButton", {
 			this.confirm = false;
 			this.$onInit = function() {
 				vm.removalOnly = vm.removalOnly || false;
-                vm.key = observedList.key(vm.platform, vm.id);
+                vm.key = observedList.key(vm.platform, vm.app);
                 vm.isObserved = null;
                 $scope.$watch(
                     () => (observedList.isObserved(vm.key) ),
                     (isObserved) => {vm.isObserved = isObserved;}
                 );
                 vm.addToObserved = function() {
-                    observedList.add(vm.platform, vm.id, vm.type);
+                    observedList.add(vm.platform, vm.app, vm.type);
                 }
                 vm.removeFromObserved = function() {
                     observedList.remove(vm.key);

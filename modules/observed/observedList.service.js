@@ -4,15 +4,15 @@ angular.module("observed").factory("observedList",
 
 	let observedList = {
 		list: null,
-		add: function(platform, id, type) {
-			firebaseRef && firebaseRef.child(this.key(platform, id))
-										.set({platform: platform, id: id, type: type});
+		add: function(platform, app, type) {
+			firebaseRef && firebaseRef.child(this.key(platform, app))
+										.set({platform: platform, app: app, type: type});
 		},
 		remove: function(key) {
 			firebaseRef && firebaseRef.child(key).remove();
 		},
-		key: function(platform, id) {
-			return platform + "-" + id;
+		key: function(platform, app) {
+			return platform + "-" + app;
 		},
 		isObserved: function(key) {
 			return this.list && (this.list[key] !== undefined);
@@ -42,7 +42,7 @@ angular.module("observed").factory("observedList",
 	function syncList() {
 		firebaseRef.on("child_added", function(child) {
 			let val = child.val();
-			let key = observedList.key(val.platform, val.id);
+			let key = observedList.key(val.platform, val.app);
 			$timeout(() => { $rootScope.$apply(() => {
 				observedList.list[key] = val;
 			}); }, 0, false);
@@ -50,7 +50,7 @@ angular.module("observed").factory("observedList",
 
 		firebaseRef.on("child_removed", function(child) {
             let val = child.val();
-            let key = observedList.key(val.platform, val.id);
+            let key = observedList.key(val.platform, val.app);
 			$timeout(() => { $rootScope.$apply(() => {
 				observedList.list[key] = undefined;
 			}); }, 0, false);

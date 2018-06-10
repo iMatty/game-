@@ -22,9 +22,23 @@ angular.module("gameDetailsFetcher")
                 reinitialize();
                 getSteamDetailsBySearchTerm(searchTerm);
                 getGogDetailsBySearchTerm(searchTerm);
-            },
-            vm.fetchByIds = function (gogIds, steamIds) {
+            };
+            vm.fetchByIds = function(appList) {
                 reinitialize();
+                getSteamDetailsByIds(filter("filter")(appList, { platform: "Steam" }));
+                getGogDetailsByIds($filter("filter")(appList, { platform: "GOG" }));
+            };
+            vm.fetchById = function(app) {
+                canceler.resolve();
+                canceler = $q.defer();
+                switch(app.platform) {
+                    case "Steam":
+                        getSteamDetailsByIds(app);
+                        break;
+                    case "GOG":
+                        getGogDetailsByIds(app);
+                        break;
+                }
             };
 
             $rootScope.$watch(() => steamReady && galaxyReady,
