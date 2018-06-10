@@ -4,9 +4,9 @@ angular.module("observed").factory("observedList",
 
 	let observedList = {
 		list: null,
-		add: function(platform, id) {
+		add: function(platform, id, type) {
 			firebaseRef && firebaseRef.child(this.key(platform, id))
-										.set({platform: platform, id: id});
+										.set({platform: platform, id: id, type: type});
 		},
 		remove: function(key) {
 			firebaseRef && firebaseRef.child(key).remove();

@@ -62,6 +62,15 @@
 	<script src="modules/gamesTable/gamesTable.module.js"></script>
 	<script src="modules/gamesTable/gamesTable.component.js"></script>
 
+	<!-- filter unique -->
+	<script src="modules/filterUnique/filterUnique.js"></script>
+
+	<!-- game details fetcher -->
+	<script src="modules/gameDetailsFetcher/gameDetailsFetcher.module.js"></script>
+	<script src="modules/gameDetailsFetcher/gameDetailsFetcher.service.js"></script>
+	<script src="modules/gameDetailsFetcher/steamApi.value.js"></script>
+
+
 	<script src="games.module.js"></script>
 	<link rel="stylesheet" href="styleCorrections.css">
 	<link rel="stylesheet" href="table.css">
@@ -128,8 +137,9 @@
 	
 	<div class="container-fluid">
 		<div ng-app="table" ng-controller="tableCtrl"
-			 ng-init="search = ''; data = []; galaxyReady = true; steamReady = true">
-            <div class="row justify-content-center" style="margin-top: 4em">
+			 ng-init="search = '';" class="ng-cloak">
+            <div ng-show="gameDetFetch.initialized"
+					class="row justify-content-center" style="margin-top: 4em">
                 <div class="col-sm-10 col-md-8 col-lg-6">
                     <div class="input-group">
                         <input autofocus type="text" class="form-control" placeholder="Search..."
@@ -137,16 +147,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center ng-cloak">
+            <div class="row justify-content-center">
                 <div class="col-sm-12 col-md-10 col-lg-8 table-style">
-					<loading-icon ng-show="!galaxyReady || !steamReady"
+					<loading-icon ng-show="!gameDetFetch.dataReady"
 								  data-which="'doubleGear'" data-color="'#999'" data-color2="'#222238'"
 								  style="display:block; height:10em; width:10em; margin:0 auto;"></loading-icon>
-                    <div ng-show="galaxyReady && steamReady && data.length == 0 && search.length >= 3" class="table-zero">
+                    <div ng-show="gameDetFetch.dataReady && gameDetFetch.data.length == 0 && search.length >= 3" class="table-zero">
                         <span>No results found.</span>
                     </div>
-					<games-table ng-show="galaxyReady && steamReady && data.length != 0"
-								 data-games="data"></games-table>
+					<games-table ng-show="gameDetFetch.dataReady && gameDetFetch.data.length > 0"
+								 data-games="gameDetFetch.data"></games-table>
                 </div>
             </div>
         </div>

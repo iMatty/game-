@@ -2,6 +2,7 @@ angular.module("observed").component("observedButton", {
 		bindings: {
 			platform: "<",
 			id: "<",
+			type: "<",
 			removalOnly: "<"
 		},
 		templateUrl: "modules/observed/observedButton.template.html",
@@ -17,7 +18,7 @@ angular.module("observed").component("observedButton", {
                     (isObserved) => {vm.isObserved = isObserved;}
                 );
                 vm.addToObserved = function() {
-                    observedList.add(vm.platform, vm.id);
+                    observedList.add(vm.platform, vm.id, vm.type);
                 }
                 vm.removeFromObserved = function() {
                     observedList.remove(vm.key);

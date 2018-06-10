@@ -1,1 +1,1 @@
-angular.module("gamesTable", ["datatables"]);
+angular.module("gamesTable", ["datatables", "filterUnique"]);

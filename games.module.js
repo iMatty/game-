@@ -1,4 +1,4 @@
-angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed", "gamesTable"])
+angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed", "datatables", "gamesTable", "gameDetailsFetcher"])
 	.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix("");
         $routeProvider
@@ -28,16 +28,16 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
             }
         };
 	}])
-	.controller("tableCtrl", function ($scope, $http, $q, $timeout, $filter) {
+	.controller("tableCtrl", function ($scope, $http, $q, $timeout, $filter, gameDetailsFetcher) {
+        $scope.gameDetFetch = gameDetailsFetcher;
 
-        var initialized = false;
-        var data = [];
-        var steamApi = [];
-        var canceler = $q.defer();
+        $scope.$watch("search", function(searchTerm) {
+            if(searchTerm.length >= 3)
+                gameDetailsFetcher.fetchBySearchTerm(searchTerm);
+        });
 
-
-        $http.get("../data/steam.min.json")
-            .then(function (response) {
+        /*
+        .then(function (response) {
                 for (let i = 0; i < response.data.applist.apps.length; i++) {
                     steamApi.push({
                         app: response.data.applist.apps[i].app,
@@ -46,8 +46,7 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
                         search: (response.data.applist.apps[i].name).replace(/[^\w\s-]/gi, '')
                     });
                 }
-            })
-            .catch(function (response) { });
+
 
         $scope.$watch("search", function () {
             if (initialized) {
@@ -73,8 +72,7 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
 
         function getGalaxySearchList() {
             let galaxySearchList = [];
-            $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search="
-                                            + $scope.search, timeout: canceler.promise })
+            $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search, timeout: canceler.promise })
                 .then(function (response) {
                     for (let i = 0; i < response.data.products.length; i++) {
                         galaxySearchList.push(response.data.products[i]);
@@ -86,8 +84,7 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
 
         function getGalaxyGameList(galaxySearchList) {
             if (galaxySearchList.length != 0) {
-                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids="
-                                        + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise })
+                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise })
                     .then(function (response) {
                         for (let i = 0; i < response.data.length; i++) {
                             data.push({
@@ -158,44 +155,5 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
                     .catch(function (response) { })
             } else {
                 $scope.steamReady = true;
-            }
-        };
-    })
-	.filter('unique', function () {
-
-		return function (items, filterOn) {
-
-			if (filterOn === false) {
-				return items;
-			}
-
-			if ((filterOn || angular.isUndefined(filterOn)) && angular.isArray(items)) {
-				var hashCheck = {}, newItems = [];
-
-				var extractValueToCompare = function (item) {
-					if (angular.isObject(item) && angular.isString(filterOn)) {
-						return item[filterOn];
-					} else {
-						return item;
-					}
-				};
-
-				angular.forEach(items, function (item) {
-					var valueToCheck, isDuplicate = false;
-
-					for (var i = 0; i < newItems.length; i++) {
-						if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
-							isDuplicate = true;
-							break;
-						}
-					}
-					if (!isDuplicate) {
-						newItems.push(item);
-					}
-
-				});
-				items = newItems;
-			}
-			return items;
-		};
+            }*/
 	});
