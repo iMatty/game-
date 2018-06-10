@@ -40,8 +40,8 @@ angular.module("observed").factory("observedList",
 			// initialize
 			$timeout(() => { $rootScope.$apply(() => {
                 observedList.list = new gameDetailsFetcher(snapshot.val() || {});
+                syncList();
 			}); }, 0, false);
-			syncList();
 		});
 	}
 	
