@@ -152,10 +152,10 @@
 					<loading-icon ng-show="!gameDetFetch.dataReady"
 								  data-which="'doubleGear'" data-color="'#999'" data-color2="'#222238'"
 								  style="display:block; height:10em; width:10em; margin:0 auto;"></loading-icon>
-                    <div ng-show="gameDetFetch.dataReady && gameDetFetch.data.length == 0 && search.length >= 3" class="table-zero">
+                    <div ng-show="gameDetFetch.dataReady && gameDetFetch.length == 0 && search.length >= 3" class="table-zero">
                         <span>No results found.</span>
                     </div>
-					<games-table ng-show="gameDetFetch.dataReady && gameDetFetch.data.length > 0"
+					<games-table ng-show="gameDetFetch.dataReady && gameDetFetch.length > 0"
 								 data-games="gameDetFetch.data"></games-table>
                 </div>
             </div>
@@ -177,15 +177,15 @@
 
 							<div class="form-group">
 								<label for="name">Nickname: </label>
-								<input type="text" class="form-control" name="name" />
+								<input id="name" type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
 								<label for="email">E-mail: *</label>
-								<input type="email" class="form-control" name="email" required />
+								<input id="email" type="email" class="form-control" name="email" required />
 							</div>
 							<div class="form-group">
-								<label>Your message: *</label>
-								<textarea name="message" type="text" class="form-control" required /></textarea>
+								<label for="message">Your message: *</label>
+								<textarea id="message" name="message" type="text" class="form-control" required /></textarea>
 							</div>
 					</div>
 

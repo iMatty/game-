@@ -1,5 +1,6 @@
 angular.module("observed").factory("observedList",
-		["$rootScope", "auth", "$timeout", function($rootScope, auth, $timeout) {
+		["$rootScope", "auth", "$timeout", "gameDetailsFetcher",
+			function($rootScope, auth, $timeout, gameDetailsFetcher) {
 	let firebaseRef;
 
 	let observedList = {

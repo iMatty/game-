@@ -7,8 +7,7 @@
         <th>Platform</th>
     </tr>
     </thead>
-    <tbody>
-    <tr ng-repeat="i in $ctrl.games | unique: 'app'">
+    <tr ng-repeat="i in $ctrl.games">
         <td style="position: relative;">
             <img ng-src="{{i.image}}" />
             {{i.name}}

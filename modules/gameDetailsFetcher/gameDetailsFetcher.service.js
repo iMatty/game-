@@ -1,6 +1,6 @@
 angular.module("gameDetailsFetcher")
-    .factory("gameDetailsFetcher", ["$rootScope", "$q", "$http", "$filter", "steamApi",
-                                    function($rootScope, $q, $http, $filter, steamApi) {
+    .factory("gameDetailsFetcher", ["$rootScope", "$timeout", "$q", "$http", "$filter", "steamApi",
+                                    function($rootScope, $timeout, $q, $http, $filter, steamApi) {
 
         $rootScope.$watch(() => steamApi.initialized,
                     (initialized) => gameDetailsFetcher.initialized = initialized);
@@ -13,8 +13,9 @@ angular.module("gameDetailsFetcher")
 
             gameDetailsFetcher.initialized = false;
 
-            vm.data = [];
+            vm.data = {};
             vm.dataReady = true;
+            vm.length = 0;
             vm.initialized = function() {
                 return gameDetailsFetcher.initialized
             };
@@ -25,7 +26,7 @@ angular.module("gameDetailsFetcher")
             };
             vm.fetchByIds = function(appList) {
                 reinitialize();
-                getSteamDetailsByIds(filter("filter")(appList, { platform: "Steam" }));
+                getSteamDetailsByIds($filter("filter")(appList, { platform: "Steam" }));
                 getGogDetailsByIds($filter("filter")(appList, { platform: "GOG" }));
             };
             vm.fetchById = function(app) {
@@ -48,8 +49,9 @@ angular.module("gameDetailsFetcher")
                 canceler.resolve();
                 canceler = $q.defer();
                 galaxyReady = steamReady = false;
-                vm.data = [];
+                vm.data = {};
                 vm.dataReady = false;
+                vm.length = 0;
             }
 
             function getSteamDetailsBySearchTerm(searchTerm) {
@@ -81,21 +83,33 @@ angular.module("gameDetailsFetcher")
                     $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://store.steampowered.com/api/appdetails?appids="
                         + ids.join(",") + "&filters=price_overview", timeout: canceler.promise })
                         .then(function(response) {
-                            for (let i = 0; i < ids.length; i++) {
-                                if(response.data[ids[i]].success) {
-                                    vm.data.push({
-                                        name: appList[i].name,
-                                        app: appList[i].app,
-                                        type: appList[i].type,
-                                        price: response.data[ids[i]].data.price_overview != undefined ? (response.data[ids[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
-                                        sale: response.data[ids[i]].data.price_overview != undefined ? response.data[ids[i]].data.price_overview.discount_percent : 0,
-                                        platform: "Steam",
-                                        link: "https://store.steampowered.com/app/" + appList[i].app,
-                                        image: "https://steamcdn-a.akamaihd.net/steam/apps/" + appList[i].app + "/header.jpg"
-                                    });
+                            $timeout(() => { $rootScope.$apply(() =>  {
+                                for (let i = 0; i < ids.length; i++) {
+                                    if(response.data[ids[i]].success) {
+                                        if(vm.data.hasOwnProperty("Steam-" + appList[i].app)) {
+                                            let app = vm.data["Steam-" + appList[i].app];
+                                            app.name = appList[i].name,
+                                                app.price = response.data[ids[i]].data.price_overview != undefined ? (response.data[ids[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
+                                                app.sale = response.data[ids[i]].data.price_overview != undefined ? response.data[ids[i]].data.price_overview.discount_percent : 0,
+                                                app.link = "https://store.steampowered.com/app/" + appList[i].app,
+                                                app.app.image = "https://steamcdn-a.akamaihd.net/steam/apps/" + appList[i].app + "/header.jpg"
+                                        } else {
+                                            vm.data["Steam-" + appList[i].app] = {
+                                                name: appList[i].name,
+                                                app: appList[i].app,
+                                                type: appList[i].type,
+                                                price: response.data[ids[i]].data.price_overview != undefined ? (response.data[ids[i]].data.price_overview.final / 100).toFixed(2) : (0).toFixed(2),
+                                                sale: response.data[ids[i]].data.price_overview != undefined ? response.data[ids[i]].data.price_overview.discount_percent : 0,
+                                                platform: "Steam",
+                                                link: "https://store.steampowered.com/app/" + appList[i].app,
+                                                image: "https://steamcdn-a.akamaihd.net/steam/apps/" + appList[i].app + "/header.jpg"
+                                            };
+                                        }
+                                    }
+                                    vm.length++;
                                 }
-                            }
-                            steamReady = true;
+                                steamReady = true;
+                            }); }, 0, false);
                         });
                 } else {
                     steamReady = true;
@@ -120,20 +134,33 @@ angular.module("gameDetailsFetcher")
                     $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids="
                         + ids.join(","), timeout: canceler.promise})
                         .then(function(response) {
-                            for(let i = 0; i < response.data.length; i++) {
-                                vm.data.push({
-                                    name: appList[i].title,
-                                    app: appList[i].id,
-                                    type: response.data[i].game_type,
-                                    price: appList[i].price.amount,
-                                    sale: appList[i].price.discountPercentage,
-                                    platform: "GOG",
-                                    link: response.data[i].links.product_card,
-                                    image: response.data[i].images.logo2x.substring(0,
-                                        response.data[i].images.logo2x.indexOf('_')) + "_product_quartet_250.jpg"
-                                });
-                            }
-                            galaxyReady = true;
+                            $timeout(() => { $rootScope.$apply(() =>  {
+                                for (let i = 0; i < ids.length; i++) {
+                                    if(vm.data.hasOwnProperty("GOG-" + (appList[i].id || appList[i].app))) {
+                                        let app = vm.data["GOG-" + (appList[i].id || appList[i].app)];
+                                        app.name = appList[i].title || appList[i].name,
+                                        app.price = appList[i].price.amount,
+                                        app.sale = appList[i].price.discountPercentage,
+                                        app.link = response.data[i].links.product_card,
+                                        app.app.image = response.data[i].images.logo2x.substring(0,
+                                            response.data[i].images.logo2x.indexOf('_')) + "_product_quartet_250.jpg"
+                                    } else {
+                                        vm.data["GOG-" + (appList[i].id || appList[i].app)] = {
+                                            name: appList[i].title || appList[i].name,
+                                            app: appList[i].id || appList[i].app,
+                                            type: response.data[i].game_type,
+                                            price: appList[i].price.amount,
+                                            sale: appList[i].price.discountPercentage,
+                                            platform: "GOG",
+                                            link: response.data[i].links.product_card,
+                                            image: response.data[i].images.logo2x.substring(0,
+                                                response.data[i].images.logo2x.indexOf('_')) + "_product_quartet_250.jpg"
+                                        };
+                                    }
+                                    vm.length++;
+                                }
+                                galaxyReady = true;
+                            }); }, 0, false);
                         });
                 } else {
                     galaxyReady = true;

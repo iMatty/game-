@@ -5,6 +5,7 @@ angular.module("gamesTable").component("gamesTable", {
     },
     templateUrl: "modules/gamesTable/gamesTable.template.html",
     controller: function() {
+
         this.dtOptions = {
             searching: false,
             destroy: true,

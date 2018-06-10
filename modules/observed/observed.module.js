@@ -1,4 +1,4 @@
-angular.module("observed", ["firebaseuiAuth"])
+angular.module("observed", ["firebaseuiAuth", "gameDetailsFetcher"])
 	.run(function() {
 		addStyle();
 
