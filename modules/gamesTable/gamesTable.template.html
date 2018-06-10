@@ -1,0 +1,31 @@
+<table id="dataTable" datatable="ng" dt-options="dtOptions" class="table table-striped table-hover" style="width: 100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Platform</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="i in $ctrl.games | unique: 'app'">
+        <td style="position: relative;">
+            <img ng-src="{{i.image}}" />
+            {{i.name}}
+            <observed-button data-platform="i.platform" data-id="i.app"
+                             style="position: absolute; top:0; right:0; width:1em; height: 1em;"></observed-button>
+        </td>
+        <td>{{i.type}}</td>
+        <td style="white-space: nowrap">
+            <span>{{i.price}} PLN</span>
+            <span ng-if="i.sale != 0" class="badge badge-danger">-{{i.sale}}%</span>
+        </td>
+        <td style="white-space: nowrap">
+            <a target="_blanc" ng-href="{{i.link}}">
+                <span>{{i.platform}}</span>
+                <i class="fa fa-external-link fa-sm"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>

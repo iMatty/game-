@@ -1,4 +1,4 @@
-angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed", "datatables"])
+angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed", "gamesTable"])
 	.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix("");
         $routeProvider
@@ -73,7 +73,8 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
 
         function getGalaxySearchList() {
             let galaxySearchList = [];
-            $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search=" + $scope.search, timeout: canceler.promise })
+            $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search="
+                                            + $scope.search, timeout: canceler.promise })
                 .then(function (response) {
                     for (let i = 0; i < response.data.products.length; i++) {
                         galaxySearchList.push(response.data.products[i]);
@@ -85,7 +86,8 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
 
         function getGalaxyGameList(galaxySearchList) {
             if (galaxySearchList.length != 0) {
-                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids=" + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise })
+                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids="
+                                        + galaxySearchList.map(id => id.id).join(","), timeout: canceler.promise })
                     .then(function (response) {
                         for (let i = 0; i < response.data.length; i++) {
                             data.push({
