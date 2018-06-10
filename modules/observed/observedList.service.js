@@ -2,12 +2,18 @@ angular.module("observed").factory("observedList",
 		["$rootScope", "auth", "$timeout", "gameDetailsFetcher",
 			function($rootScope, auth, $timeout, gameDetailsFetcher) {
 	let firebaseRef;
+	let gameDetFetch;
 
 	let observedList = {
 		list: null,
-		add: function(platform, app, type) {
-			firebaseRef && firebaseRef.child(this.key(platform, app))
-										.set({platform: platform, app: app, type: type});
+		add: function(key, app) {
+			firebaseRef && firebaseRef.child(key).set({
+                                                platform: app.platform,
+                                                app: app.app,
+                                                type: app.type,
+                                                name: app.name,
+                                                link: app.link,
+                                                image: app.image});
 		},
 		remove: function(key) {
 			firebaseRef && firebaseRef.child(key).remove();
@@ -33,9 +39,9 @@ angular.module("observed").factory("observedList",
 		firebaseRef.once("value").then(function(snapshot) {
 			// initialize
 			$timeout(() => { $rootScope.$apply(() => {
-				observedList.list = snapshot.val() || {};
+			    gameDetFetch = new gameDetailsFetcher(snapshot.val() || {});
+                observedList.list = gameDetFetch.data;
 			}); }, 0, false);
-
 			syncList();
 		});
 	}
@@ -47,13 +53,14 @@ angular.module("observed").factory("observedList",
 			$timeout(() => { $rootScope.$apply(() => {
 				observedList.list[key] = val;
 			}); }, 0, false);
+            gameDetFetch.fetchById(val);
 		});
 
 		firebaseRef.on("child_removed", function(child) {
             let val = child.val();
             let key = observedList.key(val.platform, val.app);
 			$timeout(() => { $rootScope.$apply(() => {
-				observedList.list[key] = undefined;
+				delete observedList.list[key];
 			}); }, 0, false);
 		});
 	}

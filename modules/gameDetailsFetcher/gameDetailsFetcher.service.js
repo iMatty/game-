@@ -5,7 +5,7 @@ angular.module("gameDetailsFetcher")
         $rootScope.$watch(() => steamApi.initialized,
                     (initialized) => gameDetailsFetcher.initialized = initialized);
 
-        function gameDetailsFetcher() {
+        function gameDetailsFetcher(baseData) {
             let galaxyReady = true;
             let steamReady = true;
             let canceler = $q.defer();
@@ -13,7 +13,7 @@ angular.module("gameDetailsFetcher")
 
             gameDetailsFetcher.initialized = false;
 
-            vm.data = {};
+            vm.data = baseData || {};
             vm.dataReady = true;
             vm.length = 0;
             vm.initialized = function() {
@@ -30,14 +30,12 @@ angular.module("gameDetailsFetcher")
                 getGogDetailsByIds($filter("filter")(appList, { platform: "GOG" }));
             };
             vm.fetchById = function(app) {
-                canceler.resolve();
-                canceler = $q.defer();
                 switch(app.platform) {
                     case "Steam":
-                        getSteamDetailsByIds(app);
+                        getSteamDetailsByIds([app]);
                         break;
                     case "GOG":
-                        getGogDetailsByIds(app);
+                        getGogDetailsById(app);
                         break;
                 }
             };
@@ -66,7 +64,8 @@ angular.module("gameDetailsFetcher")
                             }
                         });
                         completeSteamListAndProceed(storeSearchItems, searchTerm);
-                    });
+                    })
+                    .catch(function() {});
             }
 
             function completeSteamListAndProceed(storeSearchItems, searchTerm) {
@@ -110,7 +109,8 @@ angular.module("gameDetailsFetcher")
                                 }
                                 steamReady = true;
                             }); }, 0, false);
-                        });
+                        })
+                        .catch(function() {});
                 } else {
                     steamReady = true;
                 }
@@ -125,14 +125,15 @@ angular.module("gameDetailsFetcher")
                             appList.push(app);
                         });
                         getGogDetailsByIds(appList);
-                    });
+                    })
+                    .catch(function() {});
             }
 
             function getGogDetailsByIds(appList) {
                 let ids = appList.map(id => id.id);
                 if(ids.length > 0) {
                     $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/http://api.gog.com/products?ids="
-                        + ids.join(","), timeout: canceler.promise})
+                                    + ids.join(","), timeout: canceler.promise})
                         .then(function(response) {
                             $timeout(() => { $rootScope.$apply(() =>  {
                                 for (let i = 0; i < ids.length; i++) {
@@ -161,10 +162,39 @@ angular.module("gameDetailsFetcher")
                                 }
                                 galaxyReady = true;
                             }); }, 0, false);
-                        });
+                        })
+                        .catch(function() {});
                 } else {
                     galaxyReady = true;
                 }
+            }
+
+            function getGogDetailsById(app) {
+                $http({ method: "GET", url: "http://rainbow.nazwa.pl:9000/https://embed.gog.com/games/ajax/filtered?mediaType=game&search="
+                                + app.name, timeout: canceler.promise})
+                    .then(function(response) {
+                        $timeout(() => { $rootScope.$apply(() =>  {
+                            if(vm.data.hasOwnProperty("GOG-" + app.app)) {
+                                let newApp = vm.data["GOG-" + app.app];
+                                newApp.price = response.data.products[0].price.amount,
+                                newApp.sale = response.data.products[0].price.discountPercentage
+                            } else {
+                                vm.data["GOG-" + app.app] = {
+                                    name: app.name,
+                                    app: app.app,
+                                    type: app.type,
+                                    price: response.data.products[0].price.amount,
+                                    sale: response.data.products[0].price.discountPercentage,
+                                    platform: "GOG",
+                                    link: app.link,
+                                    image: app.image
+                                };
+                            }
+                            vm.length++;
+                            galaxyReady = true;
+                        }); }, 0, false);
+                    })
+                    .catch(function() {});
             }
         }
 

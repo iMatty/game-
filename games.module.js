@@ -3,10 +3,10 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
         $locationProvider.hashPrefix("");
         $routeProvider
             .when("/", {
-                templateUrl: "" //"<x-search></x-search>"
+                templateUrl: "mainPage.template.html"
             })
 			.when("/profile", {
-                templateUrl: "" //"<x-profile></x-profile>"
+                templateUrl: "profilePage.template.html"
             })
             .otherwise({
                 redirectTo: "/"

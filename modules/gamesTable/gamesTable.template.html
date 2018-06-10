@@ -11,7 +11,7 @@
         <td style="position: relative;">
             <img ng-src="{{i.image}}" />
             {{i.name}}
-            <observed-button data-platform="i.platform" data-app="i.app" data-type="i.type" data-removal-only="$ctrl.removalOnly"
+            <observed-button data-app="i" data-removal-only="$ctrl.removalOnly"
                              style="position: absolute; top:0; right:0; width:1em; height: 1em;"></observed-button>
         </td>
         <td>{{i.type}}</td>
