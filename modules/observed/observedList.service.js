@@ -60,6 +60,7 @@ angular.module("observed").factory("observedList",
             let key = observedList.key(val.platform, val.app);
 			$timeout(() => { $rootScope.$apply(() => {
 				delete observedList.list.data[key];
+                observedList.list.length--;
 			}); }, 0, false);
 		});
 	}

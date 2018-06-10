@@ -4,8 +4,7 @@ angular.module("gamesTable").component("gamesTable", {
         removalOnly: "<"
     },
     templateUrl: "modules/gamesTable/gamesTable.template.html",
-    controller: function() {
-
+    controller: ["$scope", function($scope) {
         this.dtOptions = {
             searching: false,
             destroy: true,
@@ -15,5 +14,5 @@ angular.module("gamesTable").component("gamesTable", {
                 infoEmpty: ""
             }
         };
-    }
+    }]
 });
