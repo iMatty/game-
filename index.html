@@ -89,7 +89,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/" data-toggle="modal" data-target="#contactModal">Contact</a>
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
 				<li class="nav-item">
 					<loading-icon ng-show="!user.auth.loginReady"
@@ -97,8 +97,8 @@
 							data-color="'#eee'">
 					</loading-icon>
 					<div ng-show="user.auth.loginReady" class="ng-cloak">
-						<a ng-if="user.auth.user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
-						<a ng-if="user.auth.user != null" href="#/" class="nav-link dropdown-toggle"
+						<a ng-if="user.auth.user === null" href="" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
+						<a ng-if="user.auth.user != null" href="" class="nav-link dropdown-toggle"
 								data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							{{user.auth.user.displayName}}
 						</a>
@@ -134,11 +134,15 @@
             <i class='fa fa-lightbulb-o fa-2x'></i>
         </button>
     </nav>
-	
+
+	<div class="row justify-content-center">
+		<div id="infoBar" class="mx-auto"></div>
+	</div>
+
 	<div class="container-fluid" ng-view>
 
 	</div>
-	
+
 	<div class="modal fade" id="contactModal">
 		<div class="modal-dialog">
 			<div class="modal-content">

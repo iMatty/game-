@@ -18,7 +18,7 @@ angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed",
 			observedList: observedList
 		};
 	}])
-	.controller("tableCtrl", function ($scope, $http, $q, $timeout, $filter, gameDetailsFetcher) {
+	.controller("tableCtrl", function ($scope, gameDetailsFetcher) {
         $scope.gameDetFetch = new gameDetailsFetcher();
 
         $scope.$watch("search", function(searchTerm) {

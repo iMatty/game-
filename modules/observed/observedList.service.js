@@ -22,7 +22,7 @@ angular.module("observed").factory("observedList",
 			return platform + "-" + app;
 		},
 		isObserved: function(key) {
-			return this.list && (this.list[key] !== undefined);
+			return this.list && this.list.data && (this.list.data[key] !== undefined);
 		}
 	};
 
@@ -39,8 +39,7 @@ angular.module("observed").factory("observedList",
 		firebaseRef.once("value").then(function(snapshot) {
 			// initialize
 			$timeout(() => { $rootScope.$apply(() => {
-			    gameDetFetch = new gameDetailsFetcher(snapshot.val() || {});
-                observedList.list = gameDetFetch.data;
+                observedList.list = new gameDetailsFetcher(snapshot.val() || {});
 			}); }, 0, false);
 			syncList();
 		});
@@ -53,14 +52,14 @@ angular.module("observed").factory("observedList",
 			$timeout(() => { $rootScope.$apply(() => {
 				observedList.list[key] = val;
 			}); }, 0, false);
-            gameDetFetch.fetchById(val);
+            observedList.list.fetchById(val);
 		});
 
 		firebaseRef.on("child_removed", function(child) {
             let val = child.val();
             let key = observedList.key(val.platform, val.app);
 			$timeout(() => { $rootScope.$apply(() => {
-				delete observedList.list[key];
+				delete observedList.list.data[key];
 			}); }, 0, false);
 		});
 	}

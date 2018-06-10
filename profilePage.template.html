@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="container text-center text-top">
+    <div class="col-md-12">
+        <h1>
+            Your watchlist <span class="fa fa-eye" aria-hidden="true"></span>
+        </h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-10 col-lg-8 table-style">
+            <loading-icon ng-show="!user.observedList || !user.observedList.list || !user.observedList.list.dataReady"
+                          data-which="'doubleGear'" data-color="'#999'" data-color2="'#222238'"
+                          style="display:block; height:10em; width:10em; margin:0 auto;"></loading-icon>
+            <div ng-show="user.observedList && user.observedList.list &&
+                        user.observedList.list.dataReady && user.observedList.list.length == 0" class="table-zero">
+                <span>No results found.</span>
+            </div>
+            <games-table ng-show="user.observedList && user.observedList.list &&
+                        user.observedList.list.dataReady && user.observedList.list.length > 0"
+                         data-games="user.observedList.list.data" data-removal-only="true"></games-table>
+        </div>
+    </div>
+</div>
