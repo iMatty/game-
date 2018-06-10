@@ -8,7 +8,7 @@
             <path d="M 55 0 l 0 45 l 45 0 l 0 10 l -45 0 l 0 45 l -10 0 l 0 -45 l -45 0 l 0 -10 l 45 0 l 0 -45" />
         </svg>
     </div>
-    <div class="observedButtonRemove" ng-show="$ctrl.isObserved === true"
+    <div class="observedButtonRemove" ng-show="$ctrl.isObserved === true" ng-mouseleave="$ctrl.confirm = false"
          ng-click="$ctrl.removalOnly && !$ctrl.confirm ? $ctrl.confirm=true : $ctrl.removeFromObserved()">
         <span ng-show="!$ctrl.confirm">remove from observed</span>
         <span ng-show="$ctrl.confirm">Are you sure? ......</span>

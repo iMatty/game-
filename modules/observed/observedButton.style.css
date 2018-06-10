@@ -3,6 +3,9 @@
     cursor: pointer;
     height: 100%;
     width: 100%;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
 }
 .observedButtonContainer div {
     white-space: nowrap;
@@ -25,14 +28,11 @@
 .observedButtonContainer div svg {
     display: inline-block;
 }
-.observedButtonContainer:hover svg {
+.observedButtonContainer:hover {
     height: 140%;
-    transform: rotate(180deg);
-    transition: transform 0.12s linear, height 0.2s linear;
 }
 .observedButtonContainer:hover span {
     font-size: 11px;
-    transition: font-size 0.12s linear;
 }
 .observedButtonConfirm {
     cursor: pointer;
