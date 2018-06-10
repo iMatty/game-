@@ -1,13 +1,15 @@
 angular.module("observed").component("observedButton", {
 		bindings: {
 			platform: "<",
-			id: "<"
+			id: "<",
+			removalOnly: "<"
 		},
 		templateUrl: "modules/observed/observedButton.template.html",
 		controller: ["$scope", "observedList", function($scope, observedList) {
 			let vm = this;
-
+			this.confirm = false;
 			this.$onInit = function() {
+				vm.removalOnly = vm.removalOnly || false;
                 vm.key = observedList.key(vm.platform, vm.id);
                 vm.isObserved = null;
                 $scope.$watch(

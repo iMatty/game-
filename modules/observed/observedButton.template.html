@@ -1,11 +1,13 @@
-<div ng-show="$ctrl.isObserved !== null" class="observedButtonContainer"
+<div ng-show="(!$ctrl.removalOnly && $ctrl.isObserved !== null) || ($ctrl.removalOnly && $ctrl.isObserved && !$ctrl.confirm)"
+     class="observedButtonContainer"
      ng-attr-title="{{$ctrl.isObserved? 'Remove from observed' : 'Add to observed'}}">
-    <svg ng-show="$ctrl.isObserved === false" ng-click="$ctrl.addToObserved()"
+    <svg ng-show="!$ctrl.removalOnly && $ctrl.isObserved === false" ng-click="$ctrl.addToObserved()"
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
          fill="#070" viewBox="0 0 100 100">
         <path d="M 55 0 l 0 45 l 45 0 l 0 10 l -45 0 l 0 45 l -10 0 l 0 -45 l -45 0 l 0 -10 l 45 0 l 0 -45" />
     </svg>
-    <svg ng-show="$ctrl.isObserved === true" ng-click="$ctrl.removeFromObserved()"
+    <svg ng-show="!$ctrl.confirm && $ctrl.isObserved === true"
+         ng-click="$ctrl.removalOnly ? $ctrl.confirm=true : $ctrl.removeFromObserved()"
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
          fill="#900" viewBox="0 0 100 100">
         <g transform="rotate(45, 50, 50)">
@@ -13,3 +15,10 @@
         </g>
     </svg>
 </div>
+
+<span ng-show="$ctrl.isObserved !== null && $ctrl.confirm && $ctrl.isObserved === true"
+      ng-mouseout="$ctrl.confirm=false" ng-click="$ctrl.removeFromObserved()"
+      style="cursor:pointer; position:relative; top:-6px; left:-14px; font-size: 12px;
+      line-height:12px; color:#900; text-align:center; font-weight:bold; white-space: nowrap">
+    I'm sure
+</span>
