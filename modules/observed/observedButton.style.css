@@ -1,0 +1,45 @@
+.observedButtonContainer {
+    line-height: 1;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+.observedButtonContainer div {
+    white-space: nowrap;
+    text-align: right;
+    height: 100%;
+}
+.observedButtonContainer span {
+    float: left;
+    font-size: 7px;
+    vertical-align: middle;
+    font-weight: bold;
+    margin-left: 3px;
+}
+.observedButtonAdd {
+    color: #070;
+}
+.observedButtonRemove {
+    color: #900;
+}
+.observedButtonContainer div svg {
+    display: inline-block;
+}
+.observedButtonContainer:hover {
+    height: 140%;
+}
+.observedButtonContainer:hover span {
+    font-size: 11px;
+}
+.observedButtonConfirm {
+    cursor: pointer;
+    font-size: 12px;
+    height:  100%;
+    color: #900;
+    text-align:center;
+    font-weight: bold;
+    white-space: nowrap;
+}'

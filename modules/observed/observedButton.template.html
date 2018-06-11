@@ -1,0 +1,23 @@
+<div ng-show="$ctrl.isObserved !== null"
+     class="observedButtonContainer"
+     ng-attr-title="{{$ctrl.isObserved? 'Remove from observed' : 'Add to observed'}}">
+    <div class="observedButtonAdd" ng-show="!$ctrl.removalOnly && $ctrl.isObserved === false" ng-click="$ctrl.addToObserved()">
+        <span>add to observed</span>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             fill="#070" viewBox="0 0 100 100" height="100%">
+            <path d="M 55 0 l 0 45 l 45 0 l 0 10 l -45 0 l 0 45 l -10 0 l 0 -45 l -45 0 l 0 -10 l 45 0 l 0 -45" />
+        </svg>
+    </div>
+    <div class="observedButtonRemove" ng-show="$ctrl.isObserved === true" ng-mouseleave="$ctrl.confirm = false"
+         ng-click="$ctrl.removalOnly && !$ctrl.confirm ? $ctrl.confirm=true : $ctrl.removeFromObserved()">
+        <span ng-show="!$ctrl.confirm">remove from observed</span>
+        <span ng-show="$ctrl.confirm">Are you sure? ......</span>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             fill="#900" viewBox="0 0 100 100" height="100%">
+            <g transform="rotate(45, 50, 50)">
+                <path d="M 55 0 l 0 45 l 45 0 l 0 10 l -45 0 l 0 45 l -10 0 l 0 -45 l -45 0 l 0 -10 l 45 0 l 0 -45" />
+            </g>
+        </svg>
+    </div>
+
+</div>

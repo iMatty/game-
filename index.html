@@ -1,35 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="gamesApi">
-
+<html lang="en" ng-app="games">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	
     <title>Game$</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/jquery.datatables.min.js"></script>
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/angular.min.js"></script>
-    <script src="./js/angular-route.min.js"></script>
-    <script src="./js/angular-filter.min.js"></script>
-    <script src="./js/angular-datatables.min.js"></script>
-    <script src="./js/datatables.bootstrap4.min.js"></script>
-    <script src="./js/games-api.js"></script>
-    <script src="./js/dark_light.js"></script>
-    <link rel="stylesheet" href="./css/datatables.bootstrap4.min.css">
-    <link rel="stylesheet" href="./css/dark_light.css">
-    <link rel="stylesheet" href="./css/font-awesome.min.css">
+	
+	<!-- jQuery & popper & jquery.datatables -->
+	<script src="dependencies/jquery/jquery.min.js"></script>
+	<script src="dependencies/jquery/popper.min.js"></script>
+	<script src="dependencies/datatables/jquery.datatables.min.js"></script>
+    
+	<!-- AngularJS -->
+	<script src="dependencies/angularjs/angular.min.js"></script>
+	<script src="dependencies/angularjs/angular-filter.min.js"></script>
+	<script src="dependencies/angularjs/angular-route.min.js"></script>
+	
+	<!-- Bootstrap -->
+	<script src="dependencies/bootstrap/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css">
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="dependencies/font-awesome/font-awesome.min.css">
+	
+	<!-- Firebase -->
+	<script src="dependencies/firebase/firebase-app.js"></script>
+    <script src="dependencies/firebase/firebase-auth.js"></script>
+    <script src="dependencies/firebase/firebase-database.js"></script>
+	
+	<!-- FirebaseUI -->
+	<script src="dependencies/firebaseui/firebaseui.js"></script>
+	<link rel="stylesheet" href="dependencies/firebaseui/firebaseui.css">	
+	
+	<!-- angular-datatables -->
+	<script src="dependencies/datatables/angular-datatables.min.js"></script>
+	<script src="dependencies/datatables/datatables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="dependencies/datatables/datatables.bootstrap4.min.css">
+	
+	<!-- loading icon -->
+	<script src="modules/loadingIcon/loadingIcon.module.js"></script>
+	<script src="modules/loadingIcon/loadingIcon.component.js"></script>
+	
+	<!-- dark/light toggler -->
+	<script src="modules/darkLightToggler/darkLightToggler.js"></script>
+	<link rel="stylesheet" href="modules/darkLightToggler/darkLightToggler.css">
+	
+	<!-- contact -->
+	<script src="modules/contact/contact.js"></script>
+	
+	<!-- auth -->
+	<script src="modules/auth/firebaseInitialize.js"></script>
+	<script src="modules/auth/firebaseuiAuth.js"></script>
+	
+	<!-- observed -->
+	<script src="modules/observed/observed.module.js"></script>
+	<script src="modules/observed/observedButton.component.js"></script>
+	<script src="modules/observed/observedList.service.js"></script>
+	<link rel="stylesheet" href="modules/observed/observedButton.style.css">
 
-    <script src="./js/firebase-app.js"></script>
-    <script src="./js/firebase-auth.js"></script>
-    <script src="./js/firebase-database.js"></script>
-	
-	<script src="./js/firebaseInitialize.js"></script>
-	<script src="./js/firebaseui.js"></script>
-	<link rel="stylesheet" href="./css/firebaseui.css">
-	
+	<!-- games table -->
+	<script src="modules/gamesTable/gamesTable.module.js"></script>
+	<script src="modules/gamesTable/gamesTable.component.js"></script>
+
+	<!-- filter unique -->
+	<script src="modules/filterUnique/filterUnique.js"></script>
+
+	<!-- game details fetcher -->
+	<script src="modules/gameDetailsFetcher/gameDetailsFetcher.module.js"></script>
+	<script src="modules/gameDetailsFetcher/gameDetailsFetcher.service.js"></script>
+	<script src="modules/gameDetailsFetcher/steamApi.value.js"></script>
+
+
+	<script src="games.module.js"></script>
+	<link rel="stylesheet" href="styleCorrections.css">
+	<link rel="stylesheet" href="table.css">
+
+	<!-- favicon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -39,31 +86,35 @@
 	<meta name="theme-color" content="#000000">
 </head>
 
-<body id="body" class="light-mode">
-
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<body class="light-mode">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="#/">
-            <img style="margin-bottom:0.2em" src="img/logo.svg" alt="logo" />
+            <img src="img/logo.svg" alt="game$" />
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+		
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/" data-toggle="modal" data-target="#contactModal">Contact</a>
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
-				<li class="nav-item" ng-controller="authentication">
-					<img ng-show="!loginReady" class="nav-link" style="height:2.5em" src="img/loading.gif" alt="loading..." />
-					<div ng-show="loginReady" class="ng-cloak">
-						<a ng-if="user === null" href="#/" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
-						<a ng-if="user != null" href="#/" class="nav-link dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.displayName}}</a>
+				<li class="nav-item">
+					<loading-icon ng-show="!user.auth.loginReady"
+							style="display:inline-block; padding-top:0.5em; height:1.5em; width:1.5em"
+							data-color="'#eee'">
+					</loading-icon>
+					<div ng-show="user.auth.loginReady" class="ng-cloak">
+						<a ng-if="user.auth.user === null" href="" class="nav-link" data-toggle="modal" data-target="#signInModal">Login</a>
+						<a ng-if="user.auth.user != null" href="" class="nav-link dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							{{user.auth.user.displayName}}
+						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item">My account</a>
-							<a class="dropdown-item" ng-click="logout()">Sign out</a>
+							<a class="dropdown-item" href="#/profile">My account</a>
+							<a class="dropdown-item" ng-click="user.auth.signOut()" href="#/">Sign out</a>
 						</div>
 						
 						<div class="modal fade" id="signInModal">
@@ -75,7 +126,7 @@
 									</div>
 
 									<div class="modal-body">
-										<div id="firebaseui-auth-container"></div>
+										<firebaseui-auth></firebaseui-auth>
 									</div>
 
 									<div class="modal-footer">
@@ -94,35 +145,38 @@
         </button>
     </nav>
 
-    <div class="row justify-content-center">
-        <div id="infoBar" class="mx-auto"></div>
-    </div>
+	<div class="row justify-content-center">
+		<div id="infoBar" class="mx-auto"></div>
+	</div>
 
-    <div ng-view></div>
+	<div class="container-fluid" ng-view>
 
-    <div class="modal fade" id="contactModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+	</div>
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Contact us</h4>
-                </div>
+	<div class="modal fade" id="contactModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title">Contact us</h4>
+				</div>
+				
 				<form action="" role="form" method="post" id="reused_form">
 					<div class="modal-body">
 						
-							<p> Send your message in the form below and we will get back to you as early as possible.</p>
+							<p>Send your message in the form below and we will get back to you as soon as possible.</p>
 
 							<div class="form-group">
 								<label for="name">Nickname: </label>
-								<input type="text" class="form-control" name="name" />
+								<input id="name" type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="email">E-mail: </label>
-								<input type="email" class="form-control" name="email" />
+								<label for="email">E-mail: *</label>
+								<input id="email" type="email" class="form-control" name="email" required />
 							</div>
 							<div class="form-group">
-								<label>Your message: </label>
-								<textarea name="message" type="text" class="form-control" /></textarea>
+								<label for="message">Your message: *</label>
+								<textarea id="message" name="message" type="text" class="form-control" required /></textarea>
 							</div>
 					</div>
 
@@ -130,12 +184,9 @@
 						<button type="submit" class="btn btn-primary" id="btnContactUs">Send</button>
 						<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
 					</div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script src="./js/contact.js"></script>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
-
 </html>

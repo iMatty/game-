@@ -1,0 +1,13 @@
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: #eee;
+  outline: none;
+}
+.modal-header {
+  background-color: #343a40;
+  color: #eee;
+}
+.modal-content {
+  background-color: #111;
+  overflow: hidden;
+}
