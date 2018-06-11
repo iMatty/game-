@@ -196,7 +196,7 @@ angular.module("gameDetailsFetcher")
                                     name: app.name,
                                     app: app.app,
                                     type: app.type,
-                                    price: price
+                                    price: price,
                                     sale: sale,
                                     platform: "GOG",
                                     link: app.link,
