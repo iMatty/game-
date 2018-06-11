@@ -1,4 +1,4 @@
-angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed", "datatables", "gamesTable", "gameDetailsFetcher"])
+angular.module("games", ["ngRoute", "loadingIcon", "firebaseuiAuth", "observed", "datatables", "gamesTable", "gameDetailsFetcher", "carousel"])
 	.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix("");
         $routeProvider
