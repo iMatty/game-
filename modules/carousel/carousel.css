@@ -1,0 +1,108 @@
+.owl-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+}
+.owl-carousel-style > img {
+    transition: filter 0.5s;
+    filter: none;
+}
+.owl-carousel-style:hover > img,
+.owl-carousel-style:focus > img {
+    filter: grayscale(80%);
+}
+.owl-carousel-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.owl-carousel-discount {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    font-size: 2em;
+    font-weight: bold;
+    color: #a4d007;
+    text-shadow: -1px 0 #4c6b22, 0 1px #4c6b22, 1px 0 #4c6b22, 0 -1px #4c6b22;
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+.owl-carousel-text:hover .owl-carousel-discount,
+.owl-carousel-text:focus .owl-carousel-discount {
+    opacity: 0;
+}
+.owl-carousel-price {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    font-size: 2em;
+    font-weight: bold;
+    color: #a4d007;
+    text-shadow: -1px 0 #4c6b22, 0 1px #4c6b22, 1px 0 #4c6b22, 0 -1px #4c6b22;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+.owl-carousel-text:hover .owl-carousel-price,
+.owl-carousel-text:focus .owl-carousel-price {
+    opacity: 1;
+}
+.owl-carousel-price > span.original-price {
+    font-size: 0.5em;
+    text-decoration: line-through;
+    color: #ff0000;
+    text-shadow: -1px 0 #9b0000, 0 1px #9b0000, 1px 0 #9b0000, 0 -1px #9b0000;
+}
+.owl-carousel-price > span.currency {
+    font-size: 0.5em;
+    color: #f7f7f7;
+    text-shadow: -1px 0 #3d3d3d, 0 1px #3d3d3d, 1px 0 #3d3d3d, 0 -1px #3d3d3d;
+}
+.owl-carousel .owl-nav button.owl-prev {
+    color: #f7f7f7;
+    background: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0));
+    outline: none;
+}
+.owl-carousel .owl-nav button.owl-next  {
+    color: #f7f7f7;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+    outline: none;
+}
+.owl-prev, 
+.owl-next {
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: block !important;
+    text-shadow: -1px 0 #3d3d3d, 0 1px #3d3d3d, 1px 0 #3d3d3d, 0 -1px #3d3d3d;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+.owl-prev {
+    left: 0;
+}
+.owl-next {
+    right: 0;
+}
+.owl-stage:hover .owl-prev,
+.owl-stage:focus .owl-prev,
+.owl-stage:hover .owl-next,
+.owl-stage:focus .owl-next  {
+    opacity: 1;
+}
+.owl-carousel-hide {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+.owl-carousel-hide img {
+    width: 0 !important;
+    height: 0 !important;
+}
+.owl-carousel-show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: visibility 0.5s, opacity 0.5s;
+    transition-delay: 0.5s;
+}
