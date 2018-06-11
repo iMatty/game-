@@ -176,15 +176,28 @@ angular.module("gameDetailsFetcher")
                         $timeout(() => { $rootScope.$apply(() =>  {
                             if(vm.data.hasOwnProperty("GOG-" + app.app)) {
                                 let newApp = vm.data["GOG-" + app.app];
-                                newApp.price = response.data.products[0].price.amount,
-                                newApp.sale = response.data.products[0].price.discountPercentage
+                                if(response.data.products[0] && response.data.products[0].price) {
+                                    newApp.price = response.data.products[0].price.amount,
+                                    newApp.sale = response.data.products[0].price.discountPercentage
+                                } else {
+                                    newApp.price = 0;
+                                    newApp.sale = 0;
+                                }
                             } else {
+                                let sale, price
+                                if(response.data.products[0] && response.data.products[0].price) {
+                                    price = response.data.products[0].price.amount,
+                                    sale = response.data.products[0].price.discountPercentage
+                                } else {
+                                    price = 0;
+                                    sale = 0;
+                                }
                                 vm.data["GOG-" + app.app] = {
                                     name: app.name,
                                     app: app.app,
                                     type: app.type,
-                                    price: response.data.products[0].price.amount,
-                                    sale: response.data.products[0].price.discountPercentage,
+                                    price: price
+                                    sale: sale,
                                     platform: "GOG",
                                     link: app.link,
                                     image: app.image
